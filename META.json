@@ -1,0 +1,65 @@
+{
+   "abstract" : "Extensible framework for building bots",
+   "author" : [
+      "Andrew Sterling Hanenkamp <hanenkamp@cpan.org>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Dist::Zilla version 4.200009, CPAN::Meta::Converter version 2.110440",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Bot-Backbone",
+   "prereqs" : {
+      "configure" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "6.30"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "AnyEvent::XMPP::Client" : 0,
+            "AnyEvent::XMPP::Ext::Disco" : 0,
+            "AnyEvent::XMPP::Ext::MUC" : 0,
+            "Bot::Backbone::Dispatcher::Predicate::Functor" : 0,
+            "Bot::Backbone::Dispatcher::Predicate::Nesting" : 0,
+            "Carp" : 0,
+            "List::MoreUtils" : 0,
+            "List::Util" : 0,
+            "Moose" : 0,
+            "Moose::Exporter" : 0,
+            "Moose::Meta::Class" : 0,
+            "Moose::Role" : 0,
+            "Moose::Util" : 0,
+            "MooseX::Types" : 0,
+            "MooseX::Types::Moose" : 0,
+            "POE" : 0,
+            "Scalar::Util" : 0,
+            "namespace::autoclean" : 0,
+            "perl" : "v5.10.0"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "Test::More" : 0
+         }
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "bugtracker" : {
+         "mailto" : "bug-Bot-Backbone@rt.cpan.org",
+         "web" : "http://rt.cpan.org/NoAuth/Bugs.html?Dist=Bot-Backbone"
+      },
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/zostay/Bot-Backbone.git",
+         "web" : "http://github.com/zostay/Bot-Backbone"
+      }
+   },
+   "version" : "0.112320"
+}
+
