@@ -1,6 +1,6 @@
 package Bot::Backbone::Bot::Role::GroupChat;
 BEGIN {
-  $Bot::Backbone::Bot::Role::GroupChat::VERSION = '0.112320';
+  $Bot::Backbone::Bot::Role::GroupChat::VERSION = '0.112400';
 }
 use v5.10;
 use Moose::Role;
@@ -37,7 +37,7 @@ Bot::Backbone::Bot::Role::GroupChat - Provides some group related help tools
 
 =head1 VERSION
 
-version 0.112320
+version 0.112400
 
 =head1 SYNOPSIS
 
@@ -58,7 +58,7 @@ version 0.112320
   for my $name ($bot->list_group_names) { say " * $name" }
 
   my $chat = $bot->find_group('foo');
-  $chat->send_message(text => 'just to group foo');
+  $chat->send_message({ text => 'just to group foo' });
 
 =head1 DESCRIPTION
 

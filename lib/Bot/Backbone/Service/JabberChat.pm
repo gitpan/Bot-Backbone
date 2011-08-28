@@ -1,6 +1,6 @@
 package Bot::Backbone::Service::JabberChat;
 BEGIN {
-  $Bot::Backbone::Service::JabberChat::VERSION = '0.112320';
+  $Bot::Backbone::Service::JabberChat::VERSION = '0.112400';
 }
 use v5.10;
 use Moose;
@@ -8,7 +8,7 @@ use Moose;
 with qw(
     Bot::Backbone::Service::Role::Service
     Bot::Backbone::Service::Role::Dispatch
-    Bot::Backbone::Service::Role::Chat
+    Bot::Backbone::Service::Role::BareMetalChat
     Bot::Backbone::Service::Role::GroupJoiner
 );
 
@@ -86,7 +86,7 @@ has xmpp_client => (
     lazy_build  => 1,
 );
 
-sub _build_xmpp_client { AnyEvent::XMPP::Client->new( debug => 1 ) }
+sub _build_xmpp_client { AnyEvent::XMPP::Client->new }
 
 
 has xmpp_disco => (
@@ -258,6 +258,8 @@ sub join_group {
 sub got_direct_message {
     my ($self, $client, $account, $xmpp_message) = @_;
 
+    return unless defined $xmpp_message->body;
+
     my $to_contact   = $self->xmpp_contact($xmpp_message->to);
     my $from_contact = $self->xmpp_contact($xmpp_message->from);
 
@@ -344,23 +346,12 @@ sub got_group_message {
 }
 
 
-sub send_reply {
-    my ($self, $message, $text) = @_;
-
-    $self->send_message(
-        group => $message->group,
-        to    => $message->from->username,
-        text  => $text,
-    );
-}
-
-
 sub send_message {
-    my ($self, %params) = @_;
+    my ($self, $params) = @_;
 
-    my $to    = $params{to};
-    my $group = $params{group};
-    my $text  = $params{text};
+    my $to    = $params->{to};
+    my $group = $params->{group};
+    my $text  = $params->{text};
     my $contact;
 
     # Select a group to receive the message
@@ -371,6 +362,11 @@ sub send_message {
     # Select a contect to receive the message
     else {
         $contact = $self->xmpp_contact($to);
+    }
+
+    unless (defined $contact) {
+        Carp::carp("JabberChat: no contact found for $to/$group to send $text\n");
+        return;
     }
 
     $contact->make_message(body => $text)->send;
@@ -387,7 +383,7 @@ Bot::Backbone::Service::JabberChat - Connect and chat with a Jabber server
 
 =head1 VERSION
 
-version 0.112320
+version 0.112400
 
 =head1 SYNOPSIS
 
@@ -520,11 +516,6 @@ message on the associated chat consumers and the dispatcher.
 Whenever someone posts to a conference room that the bot has joined, this method
 will be called to create a L<Bot::Backbone::Message> and pass that message on to
 chat consumers and the dispatcher.
-
-=head2 send_reply
-
-Sends a message back to the same user or group that originated the given
-message.
 
 =head2 send_message
 

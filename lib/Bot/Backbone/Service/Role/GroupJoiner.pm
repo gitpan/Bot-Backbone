@@ -1,6 +1,6 @@
 package Bot::Backbone::Service::Role::GroupJoiner;
 BEGIN {
-  $Bot::Backbone::Service::Role::GroupJoiner::VERSION = '0.112320';
+  $Bot::Backbone::Service::Role::GroupJoiner::VERSION = '0.112400';
 }
 use v5.10;
 use Moose::Role;
@@ -21,7 +21,7 @@ Bot::Backbone::Service::Role::GroupJoiner - Chat services that can join a chat g
 
 =head1 VERSION
 
-version 0.112320
+version 0.112400
 
 =head1 DESCRIPTION
 

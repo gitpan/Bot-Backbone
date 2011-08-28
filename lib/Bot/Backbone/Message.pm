@@ -1,12 +1,13 @@
 package Bot::Backbone::Message;
 BEGIN {
-  $Bot::Backbone::Message::VERSION = '0.112320';
+  $Bot::Backbone::Message::VERSION = '0.112400';
 }
 use v5.10;
 use Moose;
 
 use Bot::Backbone::Identity;
 use List::MoreUtils qw( all );
+use Scalar::Util qw( blessed );
 
 # ABSTRACT: Describes a message or response
 
@@ -55,7 +56,7 @@ has text => (
 {
     package Bot::Backbone::Message::Arg;
 BEGIN {
-  $Bot::Backbone::Message::Arg::VERSION = '0.112320';
+  $Bot::Backbone::Message::Arg::VERSION = '0.112400';
 }
     use Moose;
 
@@ -310,8 +311,23 @@ sub match_next_original {
 
 
 sub reply {
-    my ($self, $text) = @_;
-    $self->chat->send_reply($self, $text);
+    my ($self, $sender, $text) = @_;
+
+    if (defined $sender and blessed $sender 
+           and $sender->does('Bot::Backbone::Service::Role::Sender')) {
+
+        $sender->send_reply($self, { text => $text });
+    }
+    elsif (defined $sender and blessed $sender 
+            and $sender->isa('Bot::Backbone::Bot')) {
+
+        # No warning... hmm...
+        $self->chat->send_reply($self, { text => $text });
+    }
+    else {
+        warn "Sender given is not a sender service or a bot: $sender\n";
+        $self->chat->send_reply($self, { text => $text });
+    }
 }
 
 __PACKAGE__->meta->make_immutable;
@@ -325,7 +341,7 @@ Bot::Backbone::Message - Describes a message or response
 
 =head1 VERSION
 
-version 0.112320
+version 0.112400
 
 =head1 SYNOPSIS
 
@@ -462,23 +478,33 @@ restored to the original using L</restore_bookmark>.
   my $value = $message->match_next('!command');
   my $value = $message->metch_next(qr{!(?:this|that)});
 
-Given a regular expression or string, matches that against the next argument in the L</args> and strips off the match. It returns the match if the match is
-successful or returns C<undef>. If given a regular express, the match will not succeed unless it matches the entire argument (i.e., a C<^> is added to the front and C<$> is added to the end).
+Given a regular expression or string, matches that against the next argument in
+the L</args> and strips off the match. It returns the match if the match is
+successful or returns C<undef>. If given a regular express, the match will not
+succeed unless it matches the entire argument (i.e., a C<^> is added to the
+front and C<$> is added to the end).
 
 =head2 match_next_original
 
   my $value = $message->match_next_original(qr{.+});
 
-Given a regular expression, this will match that against the remaining unmatched text (not via L</args>, but via the unparsed L</text>). A C<^> at the front of the regex will be added to match against L</text>.
+Given a regular expression, this will match that against the remaining unmatched
+text (not via L</args>, but via the unparsed L</text>). A C<^> at the front of
+the regex will be added to match against L</text>.
 
 If there's a match, the matching text is returned.
 
 =head2 reply
 
-  $message->reply('blah blah blah');
+  $message->reply($sender, 'blah blah blah');
 
 Sends a reply back to the entity sending the message or the group that sent it,
 using the chat service that created the message.
+
+The first argument must be a L<Bot::Backbone::Service::Role::Sender> or
+L<Bot::Backbone::Bot>, which should be the service or bot sending the reply. The
+send policy set for that sender will be applied. You may pass C<undef> or
+anything else as the sender, but a warning will be issued.
 
 =head1 AUTHOR
 

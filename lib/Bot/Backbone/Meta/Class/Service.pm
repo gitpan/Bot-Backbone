@@ -1,6 +1,6 @@
 package Bot::Backbone::Meta::Class::Service;
 BEGIN {
-  $Bot::Backbone::Meta::Class::Service::VERSION = '0.112320';
+  $Bot::Backbone::Meta::Class::Service::VERSION = '0.112400';
 }
 use Moose;
 
@@ -34,7 +34,7 @@ Bot::Backbone::Meta::Class::Service - Metaclass attached to backbone bot service
 
 =head1 VERSION
 
-version 0.112320
+version 0.112400
 
 =head1 DESCRIPTION
 

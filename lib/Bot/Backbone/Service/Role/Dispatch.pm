@@ -1,9 +1,11 @@
 package Bot::Backbone::Service::Role::Dispatch;
 BEGIN {
-  $Bot::Backbone::Service::Role::Dispatch::VERSION = '0.112320';
+  $Bot::Backbone::Service::Role::Dispatch::VERSION = '0.112400';
 }
 use v5.10;
 use Moose::Role;
+
+with 'Bot::Backbone::Service::Role::SendPolicy';
 
 use namespace::autoclean;
 
@@ -52,7 +54,7 @@ Bot::Backbone::Service::Role::Dispatch - Role for services that can perform disp
 
 =head1 VERSION
 
-version 0.112320
+version 0.112400
 
 =head1 DESCRIPTION
 

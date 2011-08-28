@@ -1,6 +1,6 @@
 package Bot::Backbone::Service::GroupChat;
 BEGIN {
-  $Bot::Backbone::Service::GroupChat::VERSION = '0.112320';
+  $Bot::Backbone::Service::GroupChat::VERSION = '0.112400';
 }
 use v5.10;
 use Bot::Backbone::Service;
@@ -9,8 +9,11 @@ with qw(
     Bot::Backbone::Service::Role::Service
     Bot::Backbone::Service::Role::Dispatch
     Bot::Backbone::Service::Role::Chat
-    Bot::Backbone::Service::Role::ChatConsumer
 );
+
+with 'Bot::Backbone::Service::Role::ChatConsumer' => {
+    -excludes => [ 'send_message' ],
+};
 
 with_bot_roles qw(
     Bot::Backbone::Bot::Role::GroupChat
@@ -32,19 +35,13 @@ sub initialize {
 }
 
 
-sub send_reply {
-    my ($self, $message, $text) = @_;
-    $self->chat->send_reply($message, $text);
-}
-
-
 sub send_message {
-    my ($self, %params) = @_;
-    my $text = $params{text};
-    $self->chat->send_message(
+    my ($self, $params) = @_;
+    my $text = $params->{text};
+    $self->chat->send_message({
         group => $self->group,
         text  => $text,
-    );
+    });
 }
 
 
@@ -69,7 +66,7 @@ Bot::Backbone::Service::GroupChat - A helper chat for performing group chats
 
 =head1 VERSION
 
-version 0.112320
+version 0.112400
 
 =head1 SYNOPSIS
 
@@ -96,10 +93,6 @@ perform chats in any other group or directly.
 =head2 initialize
 
 Joins the L</group>.
-
-=head2 send_reply
-
-Replies to L</group> chats that were forwarded on.
 
 =head2 send_message
 

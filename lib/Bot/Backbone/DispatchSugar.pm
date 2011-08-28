@@ -1,6 +1,6 @@
 package Bot::Backbone::DispatchSugar;
 BEGIN {
-  $Bot::Backbone::DispatchSugar::VERSION = '0.112320';
+  $Bot::Backbone::DispatchSugar::VERSION = '0.112400';
 }
 use v5.10;
 use Moose();
@@ -124,7 +124,7 @@ sub _respond {
     $dispatcher->add_predicate_or_return(
         Bot::Backbone::Dispatcher::Predicate::Respond->new(
             dispatcher_type => $meta,
-            responder       => $code,
+            the_code        => $code,
         )
     );
 }
@@ -199,7 +199,7 @@ Bot::Backbone::DispatchSugar - Shared sugar methods for dispatch
 
 =head1 VERSION
 
-version 0.112320
+version 0.112400
 
 =head1 DESCRIPTION
 

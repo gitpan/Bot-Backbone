@@ -1,6 +1,6 @@
 package Bot::Backbone::Service::ConsoleChat;
 BEGIN {
-  $Bot::Backbone::Service::ConsoleChat::VERSION = '0.112320';
+  $Bot::Backbone::Service::ConsoleChat::VERSION = '0.112400';
 }
 use v5.10;
 use Moose;
@@ -8,7 +8,7 @@ use Moose;
 with qw(
     Bot::Backbone::Service::Role::Service
     Bot::Backbone::Service::Role::Dispatch
-    Bot::Backbone::Service::Role::Chat
+    Bot::Backbone::Service::Role::BareMetalChat
 );
 
 use Bot::Backbone::Message;
@@ -24,6 +24,10 @@ has term => (
     required    => 1,
     lazy_build  => 1,
     clearer     => 'clear_term',
+    handles     => {
+        'put_line' => 'put',
+        'get_line' => 'get',
+    },
 );
 
 sub _build_term { 
@@ -126,16 +130,10 @@ sub initialize {
 }
 
 
-sub send_reply {
-    my ($self, $message, $text) = @_;
-    $self->term->put($text);
-}
-
-
 sub send_message {
-    my ($self, %params) = @_;
+    my ($self, $params) = @_;
 
-    my $text = $params{text};
+    my $text = $params->{text};
     $self->term->put($text);
 }
 
@@ -157,7 +155,7 @@ Bot::Backbone::Service::ConsoleChat - Chat with an interactive command line
 
 =head1 VERSION
 
-version 0.112320
+version 0.112400
 
 =head1 SYNOPSIS
 
@@ -224,10 +222,6 @@ Handles most messages typed on the command line.
 =head2 initialize
 
 This sets up the L<POE::Session> that is used to manage the terminal wheel.
-
-=head2 send_reply
-
-Whenever the bot replies to a message, the reply will be posted to console.
 
 =head2 send_message
 

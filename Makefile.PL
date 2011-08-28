@@ -22,6 +22,7 @@ my %WriteMakefileArgs = (
   'LICENSE' => 'perl',
   'NAME' => 'Bot::Backbone',
   'PREREQ_PM' => {
+    'AnyEvent' => '0',
     'AnyEvent::XMPP::Client' => '0',
     'AnyEvent::XMPP::Ext::Disco' => '0',
     'AnyEvent::XMPP::Ext::MUC' => '0',
@@ -41,7 +42,7 @@ my %WriteMakefileArgs = (
     'Scalar::Util' => '0',
     'namespace::autoclean' => '0'
   },
-  'VERSION' => '0.112320',
+  'VERSION' => '0.112400',
   'test' => {
     'TESTS' => 't/*.t'
   }

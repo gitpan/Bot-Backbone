@@ -1,6 +1,6 @@
 package Bot::Backbone::Identity;
 BEGIN {
-  $Bot::Backbone::Identity::VERSION = '0.112320';
+  $Bot::Backbone::Identity::VERSION = '0.112400';
 }
 use v5.10;
 use Moose;
@@ -41,7 +41,7 @@ Bot::Backbone::Identity - Describes an account sending or receiving a message
 
 =head1 VERSION
 
-version 0.112320
+version 0.112400
 
 =head1 SYNOPSIS
 

@@ -1,9 +1,11 @@
 package Bot::Backbone::Service::Role::ChatConsumer;
 BEGIN {
-  $Bot::Backbone::Service::Role::ChatConsumer::VERSION = '0.112320';
+  $Bot::Backbone::Service::Role::ChatConsumer::VERSION = '0.112400';
 }
 use v5.10;
 use Moose::Role;
+
+with 'Bot::Backbone::Service::Role::SendPolicy';
 
 # ABSTRACT: Role for services that listen for chat messages
 
@@ -27,6 +29,11 @@ has chat => (
     # lazy_build implies (predicate => has_chat)
     predicate   => 'has_setup_the_chat',
 );
+
+# XXX Don't delegate these two. Delegation and -excludes don't seem to
+# cooperate very well.
+sub send_message { shift->chat->send_message(@_) }
+sub send_reply   { shift->chat->send_reply(@_) }
 
 sub _build_chat {
     my $self = shift;
@@ -59,7 +66,7 @@ Bot::Backbone::Service::Role::ChatConsumer - Role for services that listen for c
 
 =head1 VERSION
 
-version 0.112320
+version 0.112400
 
 =head1 DESCRIPTION
 
@@ -99,6 +106,12 @@ The method can do whatever it wants here and the return value of this method is
 ignored.
 
 =head1 METHODS
+
+=head2 send_message
+
+=head2 send_reply
+
+Be sure to use these versions of the methods. Otherwise any send policies you have set on this class will be ignored.
 
 =head2 initialize
 

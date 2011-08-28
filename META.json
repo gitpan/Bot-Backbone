@@ -21,6 +21,7 @@
       },
       "runtime" : {
          "requires" : {
+            "AnyEvent" : 0,
             "AnyEvent::XMPP::Client" : 0,
             "AnyEvent::XMPP::Ext::Disco" : 0,
             "AnyEvent::XMPP::Ext::MUC" : 0,
@@ -60,6 +61,6 @@
          "web" : "http://github.com/zostay/Bot-Backbone"
       }
    },
-   "version" : "0.112320"
+   "version" : "0.112400"
 }
 

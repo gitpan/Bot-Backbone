@@ -1,6 +1,6 @@
 package Bot::Backbone::Meta::Class::Bot;
 BEGIN {
-  $Bot::Backbone::Meta::Class::Bot::VERSION = '0.112320';
+  $Bot::Backbone::Meta::Class::Bot::VERSION = '0.112400';
 }
 use Moose;
 
@@ -8,6 +8,19 @@ extends 'Moose::Meta::Class';
 with 'Bot::Backbone::Meta::Class::DispatchBuilder';
 
 # ABSTRACT: Metaclass attached to backbone bots
+
+
+has send_policies => (
+    is          => 'ro',
+    isa         => 'HashRef',
+    required    => 1,
+    default     => sub { +{} },
+    traits      => [ 'Hash' ],
+    handles     => {
+        add_send_policy    => 'set',
+        list_send_policies => 'keys',
+    },
+);
 
 
 has services => (
@@ -45,11 +58,17 @@ Bot::Backbone::Meta::Class::Bot - Metaclass attached to backbone bots
 
 =head1 VERSION
 
-version 0.112320
+version 0.112400
 
 =head1 SYNOPSIS
 
   my $bot = My::Bot->new;
+
+  # Introspect send policies
+  for my $name ($bot->meta->list_send_policies) {
+      my $policy = $bot->meta->send_policies->{$name};
+      say Dumper($policy);
+  }
 
   # Introspect services
   for my $name ($bot->meta->list_services) {
@@ -64,13 +83,15 @@ version 0.112320
 
 This provides the metaclass features needed for each bot and allow some introspection of the bot's structure.
 
-B<Warning:> The features are not really intended for use outside of this library. As such, the features described here might disappear in a future release.
-
 =head1 EXTENDS
 
 L<Moose::Meta::Class>
 
 =head1 ATTRIBUTES 
+
+=head2 send_policies
+
+This is a has of send policy configurations.
 
 =head2 services
 

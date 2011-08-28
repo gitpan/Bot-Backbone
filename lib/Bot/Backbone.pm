@@ -1,6 +1,6 @@
 package Bot::Backbone;
 BEGIN {
-  $Bot::Backbone::VERSION = '0.112320';
+  $Bot::Backbone::VERSION = '0.112400';
 }
 use v5.10;
 use Moose();
@@ -14,7 +14,7 @@ use Bot::Backbone::Dispatcher;
 
 
 Moose::Exporter->setup_import_methods(
-    with_meta => [ qw( dispatcher service ) ],
+    with_meta => [ qw( dispatcher service send_policy ) ],
     also      => [ qw( Moose Bot::Backbone::DispatchSugar ) ],
 );
 
@@ -28,21 +28,40 @@ sub init_meta {
 }
 
 
-sub service($%) {
-    my ($meta, $name, %config) = @_;
+sub _resolve_class_name {
+    my ($meta, $section, $class_name) = @_;
 
-    my $class_name = $config{service};
     if ($class_name =~ s/^\.//) {
-        $class_name = join '::', $meta->name, 'Service', $class_name;
+        $class_name = join '::', $meta->name, $section, $class_name;
     }
     elsif ($class_name =~ s/^=//) {
         # do nothing, we now have the exact name
     }
     else {
-        $class_name = join '::', 'Bot::Backbone::Service', $class_name;
+        $class_name = join '::', 'Bot::Backbone', $section, $class_name;
     }
 
     Class::MOP::load_class($class_name);
+    return $class_name;
+}
+
+sub send_policy($%) {
+    my ($meta, $name, @config) = @_;
+
+    my @final_config;
+    while (my ($class_name, $policy_config) = splice @config, 0, 2) {
+        $class_name = _resolve_class_name($meta, 'SendPolicy', $class_name);
+        push @final_config, [ $class_name, $policy_config ];
+    }
+
+    $meta->add_send_policy($name, \@final_config);
+}
+
+
+sub service($%) {
+    my ($meta, $name, %config) = @_;
+
+    my $class_name = _resolve_class_name($meta, 'Service', $config{service});
     $config{service} = $class_name;
 
     $meta->add_service($name, \%config);
@@ -80,7 +99,7 @@ Bot::Backbone - Extensible framework for building bots
 
 =head1 VERSION
 
-version 0.112320
+version 0.112400
 
 =head1 SYNOPSIS
 
@@ -101,6 +120,7 @@ version 0.112320
 
   service group_foo => (
       service    => 'GroupChat',
+      group      => 'foo',
       chat       => 'chat_bot',
       dispatcher => 'group_chat', # defined below
   );
@@ -257,6 +277,12 @@ to be defined as needed.
 Setup the bot package with L<Bot::Backbone::Meta::Class> as the meta class and L<Bot::Backbone::Bot> as the base class.
 
 =head1 SETUP ROUTINES
+
+=head2 send_policy
+
+  send_policy $name => ( ... );
+
+Add a new send policy configuration.
 
 =head2 service
 
