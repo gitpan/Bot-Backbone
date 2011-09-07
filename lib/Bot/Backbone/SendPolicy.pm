@@ -1,6 +1,6 @@
 package Bot::Backbone::SendPolicy;
 BEGIN {
-  $Bot::Backbone::SendPolicy::VERSION = '0.112400';
+  $Bot::Backbone::SendPolicy::VERSION = '0.112500';
 }
 use v5.10;
 use Moose::Role;
@@ -29,7 +29,7 @@ Bot::Backbone::SendPolicy - Define policies to prevent flooding and other bot no
 
 =head1 VERSION
 
-version 0.112400
+version 0.112500
 
 =head1 SYNOPSIS
 

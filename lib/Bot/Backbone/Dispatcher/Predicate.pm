@@ -1,6 +1,6 @@
 package Bot::Backbone::Dispatcher::Predicate;
 BEGIN {
-  $Bot::Backbone::Dispatcher::Predicate::VERSION = '0.112400';
+  $Bot::Backbone::Dispatcher::Predicate::VERSION = '0.112500';
 }
 use v5.10;
 use Moose;
@@ -13,7 +13,7 @@ __PACKAGE__->meta->make_immutable;
 {
     package Bot::Backbone::Dispatcher::Predicate::RedispatchTo;
 BEGIN {
-  $Bot::Backbone::Dispatcher::Predicate::RedispatchTo::VERSION = '0.112400';
+  $Bot::Backbone::Dispatcher::Predicate::RedispatchTo::VERSION = '0.112500';
 }
     use v5.10;
     use Moose;
@@ -35,7 +35,7 @@ BEGIN {
 {
     package Bot::Backbone::Dispatcher::Predicate::Nesting;
 BEGIN {
-  $Bot::Backbone::Dispatcher::Predicate::Nesting::VERSION = '0.112400';
+  $Bot::Backbone::Dispatcher::Predicate::Nesting::VERSION = '0.112500';
 }
     use v5.10;
     use Moose;
@@ -60,7 +60,7 @@ BEGIN {
 {
     package Bot::Backbone::Dispatcher::Predicate::Command;
 BEGIN {
-  $Bot::Backbone::Dispatcher::Predicate::Command::VERSION = '0.112400';
+  $Bot::Backbone::Dispatcher::Predicate::Command::VERSION = '0.112500';
 }
     use v5.10;
     use Moose;
@@ -92,7 +92,7 @@ BEGIN {
 {
     package Bot::Backbone::Dispatcher::Predicate::NotCommand;
 BEGIN {
-  $Bot::Backbone::Dispatcher::Predicate::NotCommand::VERSION = '0.112400';
+  $Bot::Backbone::Dispatcher::Predicate::NotCommand::VERSION = '0.112500';
 }
     use v5.10;
     use Moose;
@@ -115,7 +115,7 @@ BEGIN {
 {
     package Bot::Backbone::Dispatcher::Predicate::ToMe;
 BEGIN {
-  $Bot::Backbone::Dispatcher::Predicate::ToMe::VERSION = '0.112400';
+  $Bot::Backbone::Dispatcher::Predicate::ToMe::VERSION = '0.112500';
 }
     use v5.10;
     use Moose;
@@ -153,7 +153,7 @@ BEGIN {
 {
     package Bot::Backbone::Dispatcher::Predicate::GivenParameters;
 BEGIN {
-  $Bot::Backbone::Dispatcher::Predicate::GivenParameters::VERSION = '0.112400';
+  $Bot::Backbone::Dispatcher::Predicate::GivenParameters::VERSION = '0.112500';
 }
     use v5.10;
     use Moose;
@@ -229,7 +229,7 @@ BEGIN {
 {
     package Bot::Backbone::Dispatcher::Predicate::Functor;
 BEGIN {
-  $Bot::Backbone::Dispatcher::Predicate::Functor::VERSION = '0.112400';
+  $Bot::Backbone::Dispatcher::Predicate::Functor::VERSION = '0.112500';
 }
     use v5.10;
     use Moose;
@@ -264,7 +264,7 @@ BEGIN {
 {
     package Bot::Backbone::Dispatcher::Predicate::Respond;
 BEGIN {
-  $Bot::Backbone::Dispatcher::Predicate::Respond::VERSION = '0.112400';
+  $Bot::Backbone::Dispatcher::Predicate::Respond::VERSION = '0.112500';
 }
     use v5.10;
     use Moose;
@@ -293,7 +293,7 @@ BEGIN {
 {
     package Bot::Backbone::Dispatcher::Predicate::Run;
 BEGIN {
-  $Bot::Backbone::Dispatcher::Predicate::Run::VERSION = '0.112400';
+  $Bot::Backbone::Dispatcher::Predicate::Run::VERSION = '0.112500';
 }
     use v5.10;
     use Moose;
@@ -320,7 +320,7 @@ Bot::Backbone::Dispatcher::Predicate - Defines the predicate packages responsibl
 
 =head1 VERSION
 
-version 0.112400
+version 0.112500
 
 =head1 DESCRIPTION
 

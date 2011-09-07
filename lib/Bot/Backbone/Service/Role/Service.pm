@@ -1,6 +1,6 @@
 package Bot::Backbone::Service::Role::Service;
 BEGIN {
-  $Bot::Backbone::Service::Role::Service::VERSION = '0.112400';
+  $Bot::Backbone::Service::Role::Service::VERSION = '0.112500';
 }
 use Moose::Role;
 
@@ -41,7 +41,7 @@ Bot::Backbone::Service::Role::Service - Role implemented by all bot services
 
 =head1 VERSION
 
-version 0.112400
+version 0.112500
 
 =head1 DESCRIPTION
 

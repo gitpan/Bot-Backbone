@@ -1,6 +1,6 @@
 package Bot::Backbone::Message;
 BEGIN {
-  $Bot::Backbone::Message::VERSION = '0.112400';
+  $Bot::Backbone::Message::VERSION = '0.112500';
 }
 use v5.10;
 use Moose;
@@ -56,7 +56,7 @@ has text => (
 {
     package Bot::Backbone::Message::Arg;
 BEGIN {
-  $Bot::Backbone::Message::Arg::VERSION = '0.112400';
+  $Bot::Backbone::Message::Arg::VERSION = '0.112500';
 }
     use Moose;
 
@@ -341,7 +341,7 @@ Bot::Backbone::Message - Describes a message or response
 
 =head1 VERSION
 
-version 0.112400
+version 0.112500
 
 =head1 SYNOPSIS
 

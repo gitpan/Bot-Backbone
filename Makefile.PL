@@ -26,8 +26,6 @@ my %WriteMakefileArgs = (
     'AnyEvent::XMPP::Client' => '0',
     'AnyEvent::XMPP::Ext::Disco' => '0',
     'AnyEvent::XMPP::Ext::MUC' => '0',
-    'Bot::Backbone::Dispatcher::Predicate::Functor' => '0',
-    'Bot::Backbone::Dispatcher::Predicate::Nesting' => '0',
     'Carp' => '0',
     'List::MoreUtils' => '0',
     'List::Util' => '0',
@@ -39,10 +37,11 @@ my %WriteMakefileArgs = (
     'MooseX::Types' => '0',
     'MooseX::Types::Moose' => '0',
     'POE' => '0',
+    'POE::Loop::EV' => '0',
     'Scalar::Util' => '0',
     'namespace::autoclean' => '0'
   },
-  'VERSION' => '0.112400',
+  'VERSION' => '0.112500',
   'test' => {
     'TESTS' => 't/*.t'
   }

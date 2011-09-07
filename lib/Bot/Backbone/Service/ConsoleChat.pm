@@ -1,6 +1,6 @@
 package Bot::Backbone::Service::ConsoleChat;
 BEGIN {
-  $Bot::Backbone::Service::ConsoleChat::VERSION = '0.112400';
+  $Bot::Backbone::Service::ConsoleChat::VERSION = '0.112500';
 }
 use v5.10;
 use Moose;
@@ -155,7 +155,7 @@ Bot::Backbone::Service::ConsoleChat - Chat with an interactive command line
 
 =head1 VERSION
 
-version 0.112400
+version 0.112500
 
 =head1 SYNOPSIS
 

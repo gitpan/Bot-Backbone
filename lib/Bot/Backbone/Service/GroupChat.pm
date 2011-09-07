@@ -1,6 +1,6 @@
 package Bot::Backbone::Service::GroupChat;
 BEGIN {
-  $Bot::Backbone::Service::GroupChat::VERSION = '0.112400';
+  $Bot::Backbone::Service::GroupChat::VERSION = '0.112500';
 }
 use v5.10;
 use Bot::Backbone::Service;
@@ -29,9 +29,23 @@ has group => (
 );
 
 
+has nickname => (
+    is          => 'ro',
+    isa         => 'Str',
+    predicate   => 'has_nickname',
+);
+
+
 sub initialize {
     my $self = shift;
-    $self->chat->join_group($self->group);
+
+    my %options = (
+        group => $self->group,
+    );
+
+    $options{nickname} = $self->nickname if $self->has_nickname;
+
+    $self->chat->join_group(\%options);
 }
 
 
@@ -66,7 +80,7 @@ Bot::Backbone::Service::GroupChat - A helper chat for performing group chats
 
 =head1 VERSION
 
-version 0.112400
+version 0.112500
 
 =head1 SYNOPSIS
 
@@ -87,6 +101,11 @@ consumed chat service.
 
 This is the name of the group this chat will communicate with. It will not
 perform chats in any other group or directly.
+
+=head2 nickname
+
+This is the nickname to pass to the chat when joining the group. If not set, no
+special nickname will be requested.
 
 =head1 METHODS
 

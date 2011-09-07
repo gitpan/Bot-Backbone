@@ -1,6 +1,6 @@
 package Bot::Backbone::Service::Role::Chat;
 BEGIN {
-  $Bot::Backbone::Service::Role::Chat::VERSION = '0.112400';
+  $Bot::Backbone::Service::Role::Chat::VERSION = '0.112500';
 }
 use v5.10;
 use Moose::Role;
@@ -55,7 +55,7 @@ Bot::Backbone::Service::Role::Chat - Chat services must implement this role
 
 =head1 VERSION
 
-version 0.112400
+version 0.112500
 
 =head1 DESCRIPTION
 
