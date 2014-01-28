@@ -1,6 +1,6 @@
 package Bot::Backbone::Service::Role::Responder;
-BEGIN {
-  $Bot::Backbone::Service::Role::Responder::VERSION = '0.112500';
+{
+  $Bot::Backbone::Service::Role::Responder::VERSION = '0.140280';
 }
 use v5.10;
 use Moose::Role;
@@ -31,6 +31,7 @@ sub send_message {
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -39,7 +40,7 @@ Bot::Backbone::Service::Role::Responder - A role for services that respond to me
 
 =head1 VERSION
 
-version 0.112500
+version 0.140280
 
 =head1 SYNOPSIS
 
@@ -97,10 +98,9 @@ Andrew Sterling Hanenkamp <hanenkamp@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Qubling Software LLC.
+This software is copyright (c) 2014 by Qubling Software LLC.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

@@ -4,10 +4,13 @@ author:
   - 'Andrew Sterling Hanenkamp <hanenkamp@cpan.org>'
 build_requires:
   Test::More: 0
+  lib: 0
+  strict: 0
+  warnings: 0
 configure_requires:
   ExtUtils::MakeMaker: 6.30
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.200009, CPAN::Meta::Converter version 2.110440'
+generated_by: 'Dist::Zilla version 4.300038, CPAN::Meta::Converter version 2.120921'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -19,6 +22,7 @@ requires:
   AnyEvent::XMPP::Ext::Disco: 0
   AnyEvent::XMPP::Ext::MUC: 0
   Carp: 0
+  Class::Load: 0.20
   List::MoreUtils: 0
   List::Util: 0
   Moose: 0
@@ -30,10 +34,11 @@ requires:
   MooseX::Types::Moose: 0
   POE: 0
   POE::Loop::EV: 0
+  POE::Wheel::ReadLine: 0
   Scalar::Util: 0
   namespace::autoclean: 0
-  perl: v5.10
+  perl: v5.10.0
 resources:
   bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=Bot-Backbone
   repository: git://github.com/zostay/Bot-Backbone.git
-version: 0.112500
+version: 0.140280

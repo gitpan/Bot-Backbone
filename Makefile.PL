@@ -9,44 +9,63 @@ use ExtUtils::MakeMaker 6.30;
 
 
 my %WriteMakefileArgs = (
-  'ABSTRACT' => 'Extensible framework for building bots',
-  'AUTHOR' => 'Andrew Sterling Hanenkamp <hanenkamp@cpan.org>',
-  'BUILD_REQUIRES' => {
-    'Test::More' => '0'
+  "ABSTRACT" => "Extensible framework for building bots",
+  "AUTHOR" => "Andrew Sterling Hanenkamp <hanenkamp\@cpan.org>",
+  "BUILD_REQUIRES" => {},
+  "CONFIGURE_REQUIRES" => {
+    "ExtUtils::MakeMaker" => "6.30"
   },
-  'CONFIGURE_REQUIRES' => {
-    'ExtUtils::MakeMaker' => '6.30'
+  "DISTNAME" => "Bot-Backbone",
+  "EXE_FILES" => [],
+  "LICENSE" => "perl",
+  "NAME" => "Bot::Backbone",
+  "PREREQ_PM" => {
+    "AnyEvent" => 0,
+    "AnyEvent::XMPP::Client" => 0,
+    "AnyEvent::XMPP::Ext::Disco" => 0,
+    "AnyEvent::XMPP::Ext::MUC" => 0,
+    "Carp" => 0,
+    "Class::Load" => "0.20",
+    "List::MoreUtils" => 0,
+    "List::Util" => 0,
+    "Moose" => 0,
+    "Moose::Exporter" => 0,
+    "Moose::Meta::Class" => 0,
+    "Moose::Role" => 0,
+    "Moose::Util" => 0,
+    "MooseX::Types" => 0,
+    "MooseX::Types::Moose" => 0,
+    "POE" => 0,
+    "POE::Loop::EV" => 0,
+    "POE::Wheel::ReadLine" => 0,
+    "Scalar::Util" => 0,
+    "namespace::autoclean" => 0
   },
-  'DISTNAME' => 'Bot-Backbone',
-  'EXE_FILES' => [],
-  'LICENSE' => 'perl',
-  'NAME' => 'Bot::Backbone',
-  'PREREQ_PM' => {
-    'AnyEvent' => '0',
-    'AnyEvent::XMPP::Client' => '0',
-    'AnyEvent::XMPP::Ext::Disco' => '0',
-    'AnyEvent::XMPP::Ext::MUC' => '0',
-    'Carp' => '0',
-    'List::MoreUtils' => '0',
-    'List::Util' => '0',
-    'Moose' => '0',
-    'Moose::Exporter' => '0',
-    'Moose::Meta::Class' => '0',
-    'Moose::Role' => '0',
-    'Moose::Util' => '0',
-    'MooseX::Types' => '0',
-    'MooseX::Types::Moose' => '0',
-    'POE' => '0',
-    'POE::Loop::EV' => '0',
-    'Scalar::Util' => '0',
-    'namespace::autoclean' => '0'
+  "TEST_REQUIRES" => {
+    "Test::More" => 0,
+    "lib" => 0,
+    "strict" => 0,
+    "warnings" => 0
   },
-  'VERSION' => '0.112500',
-  'test' => {
-    'TESTS' => 't/*.t'
+  "VERSION" => "0.140280",
+  "test" => {
+    "TESTS" => "t/*.t"
   }
 );
 
+
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
+  my $tr = delete $WriteMakefileArgs{TEST_REQUIRES};
+  my $br = $WriteMakefileArgs{BUILD_REQUIRES};
+  for my $mod ( keys %$tr ) {
+    if ( exists $br->{$mod} ) {
+      $br->{$mod} = $tr->{$mod} if $tr->{$mod} > $br->{$mod};
+    }
+    else {
+      $br->{$mod} = $tr->{$mod};
+    }
+  }
+}
 
 unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
   my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};

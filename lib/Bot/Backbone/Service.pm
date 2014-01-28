@@ -1,12 +1,13 @@
 package Bot::Backbone::Service;
-BEGIN {
-  $Bot::Backbone::Service::VERSION = '0.112500';
+{
+  $Bot::Backbone::Service::VERSION = '0.140280';
 }
 use v5.10;
 use Moose();
 use Bot::Backbone::DispatchSugar();
 use Moose::Exporter;
 use Moose::Util qw( ensure_all_roles );
+use Class::Load;
 
 use Bot::Backbone::Meta::Class::Service;
 use Bot::Backbone::Dispatcher;
@@ -31,7 +32,7 @@ sub init_meta {
 
 sub with_bot_roles {
     my ($meta, @roles) = @_;
-    Class::MOP::load_class($_) for @roles;
+    Class::Load::load_class($_) for @roles;
     $meta->add_bot_roles(@roles);
 }
 
@@ -67,6 +68,7 @@ sub service_dispatcher($) {
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -75,7 +77,7 @@ Bot::Backbone::Service - Useful features for services
 
 =head1 VERSION
 
-version 0.112500
+version 0.140280
 
 =head1 SYNOPSIS
 
@@ -200,10 +202,9 @@ Andrew Sterling Hanenkamp <hanenkamp@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Qubling Software LLC.
+This software is copyright (c) 2014 by Qubling Software LLC.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

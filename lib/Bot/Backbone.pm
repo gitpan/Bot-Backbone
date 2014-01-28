@@ -1,11 +1,12 @@
 package Bot::Backbone;
-BEGIN {
-  $Bot::Backbone::VERSION = '0.112500';
+{
+  $Bot::Backbone::VERSION = '0.140280';
 }
 use v5.10;
 use Moose();
 use Bot::Backbone::DispatchSugar();
 use Moose::Exporter;
+use Class::Load;
 
 use Bot::Backbone::Meta::Class::Bot;
 use Bot::Backbone::Dispatcher;
@@ -41,7 +42,7 @@ sub _resolve_class_name {
         $class_name = join '::', 'Bot::Backbone', $section, $class_name;
     }
 
-    Class::MOP::load_class($class_name);
+    Class::Load::load_class($class_name);
     return $class_name;
 }
 
@@ -91,6 +92,7 @@ sub dispatcher($$) {
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -99,7 +101,7 @@ Bot::Backbone - Extensible framework for building bots
 
 =head1 VERSION
 
-version 0.112500
+version 0.140280
 
 =head1 SYNOPSIS
 
@@ -434,10 +436,9 @@ Andrew Sterling Hanenkamp <hanenkamp@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Qubling Software LLC.
+This software is copyright (c) 2014 by Qubling Software LLC.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-

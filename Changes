@@ -1,3 +1,9 @@
+0.140280  2014-01-28 07:05:02 America/Chicago
+
+    * Bugfix: Corrects [rt.cpan.org #90955] reported by Upasana Shukla and
+      patched by Zoffix Znet. The use of Class::MOP::load_class is now
+      deprecated. Use Class::Load::load_class instead.
+
 0.112500  2011-09-06 23:08:32 America/Chicago
     
     * API Change: The join_group() method of the GroupJoiner role now accepts a

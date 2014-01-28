@@ -1,6 +1,6 @@
 package Bot::Backbone::Meta::Class::DispatchBuilder;
-BEGIN {
-  $Bot::Backbone::Meta::Class::DispatchBuilder::VERSION = '0.112500';
+{
+  $Bot::Backbone::Meta::Class::DispatchBuilder::VERSION = '0.140280';
 }
 use Moose::Role;
 
@@ -16,6 +16,7 @@ has building_dispatcher => (
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -24,7 +25,7 @@ Bot::Backbone::Meta::Class::DispatchBuilder - Metaclass role providing dispatche
 
 =head1 VERSION
 
-version 0.112500
+version 0.140280
 
 =head1 DESCRIPTION
 
@@ -36,10 +37,9 @@ Andrew Sterling Hanenkamp <hanenkamp@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Qubling Software LLC.
+This software is copyright (c) 2014 by Qubling Software LLC.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 =cut
-
