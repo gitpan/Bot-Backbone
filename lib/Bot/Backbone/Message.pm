@@ -1,11 +1,12 @@
 package Bot::Backbone::Message;
 {
-  $Bot::Backbone::Message::VERSION = '0.140280';
+  $Bot::Backbone::Message::VERSION = '0.140490';
 }
 use v5.10;
 use Moose;
 
 use Bot::Backbone::Identity;
+use Bot::Backbone::Types qw( VolumeLevel );
 use List::MoreUtils qw( all );
 use Scalar::Util qw( blessed );
 
@@ -47,6 +48,14 @@ has group => (
 );
 
 
+has volume => (
+    is          => 'ro',
+    isa         => VolumeLevel,
+    required    => 1,
+    default     => 'spoken',
+);
+
+
 has text => (
     is          => 'rw',
     isa         => 'Str',
@@ -56,7 +65,7 @@ has text => (
 {
     package Bot::Backbone::Message::Arg;
 {
-  $Bot::Backbone::Message::Arg::VERSION = '0.140280';
+  $Bot::Backbone::Message::Arg::VERSION = '0.140490';
 }
     use Moose;
 
@@ -342,7 +351,7 @@ Bot::Backbone::Message - Describes a message or response
 
 =head1 VERSION
 
-version 0.140280
+version 0.140490
 
 =head1 SYNOPSIS
 
@@ -377,6 +386,26 @@ well.
 =head2 group
 
 This is the name of the chat room.
+
+=head2 volume
+
+This is the volume of the message. It must be one of the following values:
+
+=over
+
+=item shout
+
+This is a message sent across multiple chats and channels, typically a system message or administrator alert.
+
+=item spoken
+
+This is a message stated to all the users within the chat. This is the normal volume level.
+
+=item whisper
+
+This is a message stated to only a few users within the chat, usually just one, the recipient.
+
+=back
 
 =head2 text
 

@@ -1,6 +1,6 @@
 package Bot::Backbone::Service;
 {
-  $Bot::Backbone::Service::VERSION = '0.140280';
+  $Bot::Backbone::Service::VERSION = '0.140490';
 }
 use v5.10;
 use Moose();
@@ -77,7 +77,7 @@ Bot::Backbone::Service - Useful features for services
 
 =head1 VERSION
 
-version 0.140280
+version 0.140490
 
 =head1 SYNOPSIS
 
@@ -161,6 +161,18 @@ C<to_me>
 =item *
 
 C<not_to_me>
+
+=item *
+
+C<shouted>
+
+=item *
+
+C<spoken>
+
+=item *
+
+C<whispered>
 
 =item *
 

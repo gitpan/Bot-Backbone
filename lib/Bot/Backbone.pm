@@ -1,6 +1,6 @@
 package Bot::Backbone;
 {
-  $Bot::Backbone::VERSION = '0.140280';
+  $Bot::Backbone::VERSION = '0.140490';
 }
 use v5.10;
 use Moose();
@@ -101,7 +101,7 @@ Bot::Backbone - Extensible framework for building bots
 
 =head1 VERSION
 
-version 0.140280
+version 0.140490
 
 =head1 SYNOPSIS
 
@@ -377,6 +377,24 @@ direct message or a channel message prefixed by the bot's name.
 
 This is the opposite of L</to_me>. It matches any message not sent directly to
 the bot.
+
+=head2 shouted
+
+  shouted ...
+
+Matches messages that are received from outside the current chat, such as a system message or administrator alert sent to all channels.
+
+head2 spoken
+
+  spoken ...
+
+Matches messages that are stated within the channel to all participants. This is the usual volume level.
+
+=head2 whispered
+
+  whispered ...
+
+Matches messages that are stated within the channel to only a subset of the listeners, such as a private message within a channel.
 
 =head2 also
 

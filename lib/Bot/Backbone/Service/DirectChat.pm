@@ -1,6 +1,6 @@
 package Bot::Backbone::Service::DirectChat;
 {
-  $Bot::Backbone::Service::DirectChat::VERSION = '0.140280';
+  $Bot::Backbone::Service::DirectChat::VERSION = '0.140490';
 }
 use v5.10;
 use Moose;
@@ -60,7 +60,7 @@ Bot::Backbone::Service::DirectChat - A helper for doing direct chats
 
 =head1 VERSION
 
-version 0.140280
+version 0.140490
 
 =head1 SYNOPSIS
 

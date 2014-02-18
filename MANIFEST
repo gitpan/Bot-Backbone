@@ -42,6 +42,7 @@ t/dispatch.t
 t/lib/Bot/Backbone/Service/TestChat.pm
 t/lib/Bot/Backbone/TestEventLoop.pm
 t/message.t
+t/predicate.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t
 t/send_policy.t

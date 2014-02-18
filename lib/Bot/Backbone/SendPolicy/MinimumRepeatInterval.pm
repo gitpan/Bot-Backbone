@@ -1,6 +1,6 @@
 package Bot::Backbone::SendPolicy::MinimumRepeatInterval;
 {
-  $Bot::Backbone::SendPolicy::MinimumRepeatInterval::VERSION = '0.140280';
+  $Bot::Backbone::SendPolicy::MinimumRepeatInterval::VERSION = '0.140490';
 }
 use v5.10;
 use Moose;
@@ -152,7 +152,7 @@ Bot::Backbone::SendPolicy::MinimumRepeatInterval - Prevent any message from bein
 
 =head1 VERSION
 
-version 0.140280
+version 0.140490
 
 =head1 SYNOPSIS
 

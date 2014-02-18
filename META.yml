@@ -22,7 +22,7 @@ requires:
   AnyEvent::XMPP::Ext::Disco: 0
   AnyEvent::XMPP::Ext::MUC: 0
   Carp: 0
-  Class::Load: 0.20
+  Class::Load: 0
   List::MoreUtils: 0
   List::Util: 0
   Moose: 0
@@ -33,7 +33,7 @@ requires:
   MooseX::Types: 0
   MooseX::Types::Moose: 0
   POE: 0
-  POE::Loop::EV: 0
+  POE::Loop::AnyEvent: 0
   POE::Wheel::ReadLine: 0
   Scalar::Util: 0
   namespace::autoclean: 0
@@ -41,4 +41,4 @@ requires:
 resources:
   bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=Bot-Backbone
   repository: git://github.com/zostay/Bot-Backbone.git
-version: 0.140280
+version: 0.140490

@@ -1,6 +1,6 @@
 package Bot::Backbone::Service::JabberChat;
 {
-  $Bot::Backbone::Service::JabberChat::VERSION = '0.140280';
+  $Bot::Backbone::Service::JabberChat::VERSION = '0.140490';
 }
 use v5.10;
 use Moose;
@@ -290,6 +290,17 @@ sub got_direct_message {
 }
 
 
+sub is_to_me {
+    my ($self, $me_user, $text) = @_;
+
+    my $me_nick = $me_user->nick;
+    return scalar $text =~ s/^ $me_nick \s* [:,\-]
+                            |  , \s* $me_nick [.]? $
+                            |  , \s* $me_nick \s* , 
+                            //x;
+}
+
+
 sub got_group_message {
     my ($self, $client, $room, $xmpp_message, $is_echo) = @_;
 
@@ -321,15 +332,18 @@ sub got_group_message {
 
     # See if the group message is talking to us...
     my $to_identity;
-    my $me_nick = $me_user->nick;
     my $text    = $xmpp_message->body;
-    if ($text =~ s/^ $me_nick [:,] //x) {
+    if ($self->is_to_me($me_user, $text)) {
         $to_identity = Bot::Backbone::Identity->new(
             username => $me_user->real_jid // $me_user->in_room_jid,
             nickname => $me_user->nick,
             me       => 1,
         );
     }
+
+    # Is this a message sent privately within the room?
+    my $private = $xmpp_message->is_private;
+    my $volume  = $private ? 'whisper' : 'spoken';
 
     # Build the message
     my $message = Bot::Backbone::Message->new({
@@ -339,9 +353,10 @@ sub got_group_message {
             nickname => $from_nickname,
             me       => $is_me,
         ),
-        to    => $to_identity,
-        group => $group,
-        text  => $text,
+        to     => $to_identity,
+        group  => $group,
+        text   => $text,
+        volume => $volume,
     });
 
     # Pass it on
@@ -388,7 +403,7 @@ Bot::Backbone::Service::JabberChat - Connect and chat with a Jabber server
 
 =head1 VERSION
 
-version 0.140280
+version 0.140490
 
 =head1 SYNOPSIS
 
@@ -515,6 +530,27 @@ If the session is ready already, then the group will be joined immediately.
 Whenever someone sends the bot a direct message throught eh Jabber server, this
 handler is called. It builds a L<Bot::Backbone::Message> and then passes that
 message on the associated chat consumers and the dispatcher.
+
+=head2 is_to_me
+
+  my $bool = $self->is_to_me($user, $text);
+
+Given the user that identifies the bot in a group chat and text that was just sent to the chat, this detects if the message was directed at the bot. Normally, this includes messages that start with the following:
+
+  nick: ...
+  nick, ...
+  nick- ...
+
+It also includes suffix references like this:
+
+  ..., nick.
+  ..., nick
+
+and infix references like this:
+
+  ..., nick, ...
+
+If you want something different, you may subclass service and override this method.
 
 =head2 got_group_message
 

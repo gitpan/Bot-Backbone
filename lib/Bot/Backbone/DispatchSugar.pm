@@ -1,6 +1,6 @@
 package Bot::Backbone::DispatchSugar;
 {
-  $Bot::Backbone::DispatchSugar::VERSION = '0.140280';
+  $Bot::Backbone::DispatchSugar::VERSION = '0.140490';
 }
 use v5.10;
 use Moose();
@@ -16,6 +16,7 @@ Moose::Exporter->setup_import_methods(
     with_meta => [ qw( 
         command not_command
         to_me not_to_me
+        spoken shouted whispered
         given_parameters
         also
         respond respond_by_method 
@@ -84,6 +85,42 @@ sub not_to_me($) {
         Bot::Backbone::Dispatcher::Predicate::ToMe->new(
             negate          => 1,
             next_predicate  => $predicate,
+        )
+    );
+}
+
+sub spoken($) {
+    my ($meta, $predicate) = @_;
+    my $dispatcher = $meta->building_dispatcher;
+
+    $dispatcher->add_predicate_or_return(
+        Bot::Backbone::Dispatcher::Predicate::Volume->new(
+            volume         => 'spoken',
+            next_predicate => $predicate,
+        )
+    );
+}
+
+sub shouted($) {
+    my ($meta, $predicate) = @_;
+    my $dispatcher = $meta->building_dispatcher;
+
+    $dispatcher->add_predicate_or_return(
+        Bot::Backbone::Dispatcher::Predicate::Volume->new(
+            volume         => 'shout',
+            next_predicate => $predicate,
+        )
+    );
+}
+
+sub whispered($) {
+    my ($meta, $predicate) = @_;
+    my $dispatcher = $meta->building_dispatcher;
+
+    $dispatcher->add_predicate_or_return(
+        Bot::Backbone::Dispatcher::Predicate::Volume->new(
+            volume         => 'whisper',
+            next_predicate => $predicate,
         )
     );
 }
@@ -200,7 +237,7 @@ Bot::Backbone::DispatchSugar - Shared sugar methods for dispatch
 
 =head1 VERSION
 
-version 0.140280
+version 0.140490
 
 =head1 DESCRIPTION
 
@@ -220,7 +257,10 @@ See L<Bot::Backbone> and L<Bot::Backbone::Service>.
   respond_by_method
   run_this
   run_this_method
+  shouted
+  spoken
   to_me
+  whispered
 
 =head1 AUTHOR
 

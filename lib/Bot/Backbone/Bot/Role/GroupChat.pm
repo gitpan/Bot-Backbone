@@ -1,6 +1,6 @@
 package Bot::Backbone::Bot::Role::GroupChat;
 {
-  $Bot::Backbone::Bot::Role::GroupChat::VERSION = '0.140280';
+  $Bot::Backbone::Bot::Role::GroupChat::VERSION = '0.140490';
 }
 use v5.10;
 use Moose::Role;
@@ -38,7 +38,7 @@ Bot::Backbone::Bot::Role::GroupChat - Provides some group related help tools
 
 =head1 VERSION
 
-version 0.140280
+version 0.140490
 
 =head1 SYNOPSIS
 

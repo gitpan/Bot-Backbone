@@ -25,7 +25,7 @@ my %WriteMakefileArgs = (
     "AnyEvent::XMPP::Ext::Disco" => 0,
     "AnyEvent::XMPP::Ext::MUC" => 0,
     "Carp" => 0,
-    "Class::Load" => "0.20",
+    "Class::Load" => 0,
     "List::MoreUtils" => 0,
     "List::Util" => 0,
     "Moose" => 0,
@@ -36,7 +36,7 @@ my %WriteMakefileArgs = (
     "MooseX::Types" => 0,
     "MooseX::Types::Moose" => 0,
     "POE" => 0,
-    "POE::Loop::EV" => 0,
+    "POE::Loop::AnyEvent" => 0,
     "POE::Wheel::ReadLine" => 0,
     "Scalar::Util" => 0,
     "namespace::autoclean" => 0
@@ -47,7 +47,7 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.140280",
+  "VERSION" => "0.140490",
   "test" => {
     "TESTS" => "t/*.t"
   }

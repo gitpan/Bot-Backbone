@@ -1,6 +1,6 @@
 package Bot::Backbone::Service::Role::ChatConsumer;
 {
-  $Bot::Backbone::Service::Role::ChatConsumer::VERSION = '0.140280';
+  $Bot::Backbone::Service::Role::ChatConsumer::VERSION = '0.140490';
 }
 use v5.10;
 use Moose::Role;
@@ -67,7 +67,7 @@ Bot::Backbone::Service::Role::ChatConsumer - Role for services that listen for c
 
 =head1 VERSION
 
-version 0.140280
+version 0.140490
 
 =head1 DESCRIPTION
 

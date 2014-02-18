@@ -1,6 +1,6 @@
 package Bot::Backbone::Types;
 {
-  $Bot::Backbone::Types::VERSION = '0.140280';
+  $Bot::Backbone::Types::VERSION = '0.140490';
 }
 use v5.10;
 use Moose;
@@ -12,6 +12,7 @@ use MooseX::Types -declare => [ qw(
     EventLoop
     PredicateList
     ServiceList
+    VolumeLevel
 ) ];
 use Scalar::Util qw( blessed );
 
@@ -21,7 +22,7 @@ use namespace::autoclean;
 
 
 class_type 'Moose::Meta::Class';
-enum DispatcherType, qw( bot service );
+enum DispatcherType, [qw( bot service )];
 coerce DispatcherType,
     from 'Moose::Meta::Class',
     via { 
@@ -46,6 +47,9 @@ subtype ServiceList,
     as HashRef[Object],
     where { all { blessed $_ and $_->does('Bot::Backbone::Service::Role::Service') } values %$_ };
 
+
+enum VolumeLevel, [ qw( shout spoken whisper ) ];
+
 __PACKAGE__->meta->make_immutable;
 
 __END__
@@ -58,7 +62,7 @@ Bot::Backbone::Types - The type library for Bot::Backbone
 
 =head1 VERSION
 
-version 0.140280
+version 0.140490
 
 =head1 DESCRIPTION
 
@@ -85,6 +89,14 @@ This is an array of code references.
 =head2 ServiceList
 
 This is a hash of objects that implement L<Bot::Backbone::Service::Role::Service>.
+
+=head2 VolumeLevel
+
+This is an enumeration of possible volume levels for chats. It must be one of the following:
+
+    shout
+    spoken
+    whisper
 
 =head1 AUTHOR
 
