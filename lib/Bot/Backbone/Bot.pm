@@ -1,6 +1,6 @@
 package Bot::Backbone::Bot;
 {
-  $Bot::Backbone::Bot::VERSION = '0.140490';
+  $Bot::Backbone::Bot::VERSION = '0.140590';
 }
 use v5.10;
 use Moose;
@@ -89,7 +89,7 @@ Bot::Backbone::Bot - Provides backbone services to your bot
 
 =head1 VERSION
 
-version 0.140490
+version 0.140590
 
 =head1 SYNOPSIS
 

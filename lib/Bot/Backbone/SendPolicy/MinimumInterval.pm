@@ -1,6 +1,6 @@
 package Bot::Backbone::SendPolicy::MinimumInterval;
 {
-  $Bot::Backbone::SendPolicy::MinimumInterval::VERSION = '0.140490';
+  $Bot::Backbone::SendPolicy::MinimumInterval::VERSION = '0.140590';
 }
 use v5.10;
 use Moose;
@@ -98,7 +98,7 @@ Bot::Backbone::SendPolicy::MinimumInterval - Prevent any message from being deli
 
 =head1 VERSION
 
-version 0.140490
+version 0.140590
 
 =head1 SYNOPSIS
 

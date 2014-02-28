@@ -1,6 +1,6 @@
 package Bot::Backbone::Service::JabberChat;
 {
-  $Bot::Backbone::Service::JabberChat::VERSION = '0.140490';
+  $Bot::Backbone::Service::JabberChat::VERSION = '0.140590';
 }
 use v5.10;
 use Moose;
@@ -294,10 +294,10 @@ sub is_to_me {
     my ($self, $me_user, $text) = @_;
 
     my $me_nick = $me_user->nick;
-    return scalar $text =~ s/^ $me_nick \s* [:,\-]
-                            |  , \s* $me_nick [.]? $
-                            |  , \s* $me_nick \s* , 
-                            //x;
+    return scalar($$text =~ s/^ $me_nick \s* [:,\-]
+                             |  , \s* $me_nick [.]? $
+                             |  , \s* $me_nick \s* , 
+                             //x);
 }
 
 
@@ -333,7 +333,7 @@ sub got_group_message {
     # See if the group message is talking to us...
     my $to_identity;
     my $text    = $xmpp_message->body;
-    if ($self->is_to_me($me_user, $text)) {
+    if ($self->is_to_me($me_user, \$text)) {
         $to_identity = Bot::Backbone::Identity->new(
             username => $me_user->real_jid // $me_user->in_room_jid,
             nickname => $me_user->nick,
@@ -403,7 +403,7 @@ Bot::Backbone::Service::JabberChat - Connect and chat with a Jabber server
 
 =head1 VERSION
 
-version 0.140490
+version 0.140590
 
 =head1 SYNOPSIS
 
@@ -533,9 +533,11 @@ message on the associated chat consumers and the dispatcher.
 
 =head2 is_to_me
 
-  my $bool = $self->is_to_me($user, $text);
+  my $bool = $self->is_to_me($user, \$text);
 
-Given the user that identifies the bot in a group chat and text that was just sent to the chat, this detects if the message was directed at the bot. Normally, this includes messages that start with the following:
+Given the user that identifies the bot in a group chat and text that was just
+sent to the chat, this detects if the message was directed at the bot. Normally,
+this includes messages that start with the following:
 
   nick: ...
   nick, ...
@@ -550,7 +552,11 @@ and infix references like this:
 
   ..., nick, ...
 
-If you want something different, you may subclass service and override this method.
+If you want something different, you may subclass service and override this
+method.
+
+Note that the text is sent as a reference and can be modified, usually to remove
+the nick from the message so the bot does not have to worry about that.
 
 =head2 got_group_message
 

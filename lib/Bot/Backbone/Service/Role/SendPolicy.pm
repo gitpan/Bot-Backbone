@@ -1,6 +1,6 @@
 package Bot::Backbone::Service::Role::SendPolicy;
 {
-  $Bot::Backbone::Service::Role::SendPolicy::VERSION = '0.140490';
+  $Bot::Backbone::Service::Role::SendPolicy::VERSION = '0.140590';
 }
 use v5.10;
 use Moose::Role;
@@ -103,7 +103,7 @@ Bot::Backbone::Service::Role::SendPolicy - Provides send policy framework to a s
 
 =head1 VERSION
 
-version 0.140490
+version 0.140590
 
 =head1 SYNOPSIS
 

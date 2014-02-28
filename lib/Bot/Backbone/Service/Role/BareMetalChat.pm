@@ -1,6 +1,6 @@
 package Bot::Backbone::Service::Role::BareMetalChat;
 {
-  $Bot::Backbone::Service::Role::BareMetalChat::VERSION = '0.140490';
+  $Bot::Backbone::Service::Role::BareMetalChat::VERSION = '0.140590';
 }
 use v5.10;
 use Moose::Role;
@@ -44,7 +44,7 @@ Bot::Backbone::Service::Role::BareMetalChat - A chat service that is bolted on t
 
 =head1 VERSION
 
-version 0.140490
+version 0.140590
 
 =head1 DESCRIPTION
 

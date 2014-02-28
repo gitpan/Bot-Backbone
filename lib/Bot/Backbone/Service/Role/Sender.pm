@@ -1,6 +1,6 @@
 package Bot::Backbone::Service::Role::Sender;
 {
-  $Bot::Backbone::Service::Role::Sender::VERSION = '0.140490';
+  $Bot::Backbone::Service::Role::Sender::VERSION = '0.140590';
 }
 use Moose::Role;
 
@@ -21,7 +21,7 @@ Bot::Backbone::Service::Role::Sender - Marks a service as one that may send mess
 
 =head1 VERSION
 
-version 0.140490
+version 0.140590
 
 =head1 DESCRIPTION
 

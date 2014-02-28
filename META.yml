@@ -41,4 +41,4 @@ requires:
 resources:
   bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=Bot-Backbone
   repository: git://github.com/zostay/Bot-Backbone.git
-version: 0.140490
+version: 0.140590

@@ -1,6 +1,6 @@
 package Bot::Backbone::Dispatcher::Predicate;
 {
-  $Bot::Backbone::Dispatcher::Predicate::VERSION = '0.140490';
+  $Bot::Backbone::Dispatcher::Predicate::VERSION = '0.140590';
 }
 use v5.10;
 use Moose;
@@ -13,7 +13,7 @@ __PACKAGE__->meta->make_immutable;
 {
     package Bot::Backbone::Dispatcher::Predicate::RedispatchTo;
 {
-  $Bot::Backbone::Dispatcher::Predicate::RedispatchTo::VERSION = '0.140490';
+  $Bot::Backbone::Dispatcher::Predicate::RedispatchTo::VERSION = '0.140590';
 }
     use v5.10;
     use Moose;
@@ -35,7 +35,7 @@ __PACKAGE__->meta->make_immutable;
 {
     package Bot::Backbone::Dispatcher::Predicate::Nesting;
 {
-  $Bot::Backbone::Dispatcher::Predicate::Nesting::VERSION = '0.140490';
+  $Bot::Backbone::Dispatcher::Predicate::Nesting::VERSION = '0.140590';
 }
     use v5.10;
     use Moose;
@@ -60,7 +60,7 @@ __PACKAGE__->meta->make_immutable;
 {
     package Bot::Backbone::Dispatcher::Predicate::Command;
 {
-  $Bot::Backbone::Dispatcher::Predicate::Command::VERSION = '0.140490';
+  $Bot::Backbone::Dispatcher::Predicate::Command::VERSION = '0.140590';
 }
     use v5.10;
     use Moose;
@@ -92,7 +92,7 @@ __PACKAGE__->meta->make_immutable;
 {
     package Bot::Backbone::Dispatcher::Predicate::NotCommand;
 {
-  $Bot::Backbone::Dispatcher::Predicate::NotCommand::VERSION = '0.140490';
+  $Bot::Backbone::Dispatcher::Predicate::NotCommand::VERSION = '0.140590';
 }
     use v5.10;
     use Moose;
@@ -115,7 +115,7 @@ __PACKAGE__->meta->make_immutable;
 {
     package Bot::Backbone::Dispatcher::Predicate::ToMe;
 {
-  $Bot::Backbone::Dispatcher::Predicate::ToMe::VERSION = '0.140490';
+  $Bot::Backbone::Dispatcher::Predicate::ToMe::VERSION = '0.140590';
 }
     use v5.10;
     use Moose;
@@ -153,7 +153,7 @@ __PACKAGE__->meta->make_immutable;
 {
     package Bot::Backbone::Dispatcher::Predicate::Volume;
 {
-  $Bot::Backbone::Dispatcher::Predicate::Volume::VERSION = '0.140490';
+  $Bot::Backbone::Dispatcher::Predicate::Volume::VERSION = '0.140590';
 }
     use v5.10;
     use Moose;
@@ -185,7 +185,7 @@ __PACKAGE__->meta->make_immutable;
 {
     package Bot::Backbone::Dispatcher::Predicate::GivenParameters;
 {
-  $Bot::Backbone::Dispatcher::Predicate::GivenParameters::VERSION = '0.140490';
+  $Bot::Backbone::Dispatcher::Predicate::GivenParameters::VERSION = '0.140590';
 }
     use v5.10;
     use Moose;
@@ -261,7 +261,7 @@ __PACKAGE__->meta->make_immutable;
 {
     package Bot::Backbone::Dispatcher::Predicate::Functor;
 {
-  $Bot::Backbone::Dispatcher::Predicate::Functor::VERSION = '0.140490';
+  $Bot::Backbone::Dispatcher::Predicate::Functor::VERSION = '0.140590';
 }
     use v5.10;
     use Moose;
@@ -296,7 +296,7 @@ __PACKAGE__->meta->make_immutable;
 {
     package Bot::Backbone::Dispatcher::Predicate::Respond;
 {
-  $Bot::Backbone::Dispatcher::Predicate::Respond::VERSION = '0.140490';
+  $Bot::Backbone::Dispatcher::Predicate::Respond::VERSION = '0.140590';
 }
     use v5.10;
     use Moose;
@@ -325,7 +325,7 @@ __PACKAGE__->meta->make_immutable;
 {
     package Bot::Backbone::Dispatcher::Predicate::Run;
 {
-  $Bot::Backbone::Dispatcher::Predicate::Run::VERSION = '0.140490';
+  $Bot::Backbone::Dispatcher::Predicate::Run::VERSION = '0.140590';
 }
     use v5.10;
     use Moose;
@@ -353,7 +353,7 @@ Bot::Backbone::Dispatcher::Predicate - Defines the predicate packages responsibl
 
 =head1 VERSION
 
-version 0.140490
+version 0.140590
 
 =head1 DESCRIPTION
 
