@@ -1,6 +1,6 @@
 package Bot::Backbone::Dispatcher;
 {
-  $Bot::Backbone::Dispatcher::VERSION = '0.140590';
+  $Bot::Backbone::Dispatcher::VERSION = '0.141180';
 }
 use v5.10;
 use Moose;
@@ -78,7 +78,7 @@ Bot::Backbone::Dispatcher - Simple dispatching tool
 
 =head1 VERSION
 
-version 0.140590
+version 0.141180
 
 =head1 SYNOPSIS
 

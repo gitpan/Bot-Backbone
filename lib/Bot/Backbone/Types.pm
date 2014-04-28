@@ -1,6 +1,6 @@
 package Bot::Backbone::Types;
 {
-  $Bot::Backbone::Types::VERSION = '0.140590';
+  $Bot::Backbone::Types::VERSION = '0.141180';
 }
 use v5.10;
 use Moose;
@@ -62,7 +62,7 @@ Bot::Backbone::Types - The type library for Bot::Backbone
 
 =head1 VERSION
 
-version 0.140590
+version 0.141180
 
 =head1 DESCRIPTION
 

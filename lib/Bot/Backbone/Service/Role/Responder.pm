@@ -1,6 +1,6 @@
 package Bot::Backbone::Service::Role::Responder;
 {
-  $Bot::Backbone::Service::Role::Responder::VERSION = '0.140590';
+  $Bot::Backbone::Service::Role::Responder::VERSION = '0.141180';
 }
 use v5.10;
 use Moose::Role;
@@ -40,7 +40,7 @@ Bot::Backbone::Service::Role::Responder - A role for services that respond to me
 
 =head1 VERSION
 
-version 0.140590
+version 0.141180
 
 =head1 SYNOPSIS
 

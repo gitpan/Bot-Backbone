@@ -1,6 +1,6 @@
 package Bot::Backbone::Meta::Class::DispatchBuilder;
 {
-  $Bot::Backbone::Meta::Class::DispatchBuilder::VERSION = '0.140590';
+  $Bot::Backbone::Meta::Class::DispatchBuilder::VERSION = '0.141180';
 }
 use Moose::Role;
 
@@ -25,7 +25,7 @@ Bot::Backbone::Meta::Class::DispatchBuilder - Metaclass role providing dispatche
 
 =head1 VERSION
 
-version 0.140590
+version 0.141180
 
 =head1 DESCRIPTION
 

@@ -1,6 +1,6 @@
 package Bot::Backbone::Service::JabberChat;
 {
-  $Bot::Backbone::Service::JabberChat::VERSION = '0.140590';
+  $Bot::Backbone::Service::JabberChat::VERSION = '0.141180';
 }
 use v5.10;
 use Moose;
@@ -79,6 +79,27 @@ has connection_args => (
 );
 
 
+has debug_client => (
+    is          => 'ro',
+    isa         => 'Bool',
+    required    => 1,
+    default     => 0,
+);
+
+
+has xmpp_debug_send_callback => (
+    is          => 'ro',
+    isa         => 'CodeRef',
+    predicate   => 'has_xmpp_debug_send_callback',
+);
+
+has xmpp_debug_recv_callback => (
+    is          => 'ro',
+    isa         => 'CodeRef',
+    predicate   => 'has_xmpp_debug_recv_callback',
+);
+
+
 has xmpp_client => (
     is          => 'ro',
     isa         => 'AnyEvent::XMPP::Client',
@@ -86,7 +107,30 @@ has xmpp_client => (
     lazy_build  => 1,
 );
 
-sub _build_xmpp_client { AnyEvent::XMPP::Client->new }
+sub _build_xmpp_client { 
+    my $self = shift;
+
+    my $client = AnyEvent::XMPP::Client->new(
+        debug => $self->debug_client,
+    );
+
+    for my $type (qw( send recv )) {
+        my $has_callback = "has_xmpp_debug_${type}_callback";
+        my $get_callback = "xmpp_debug_${type}_callback";
+
+        if ($self->$has_callback) {
+            my $callback = $self->$get_callback;
+            $client->reg_cb(
+                "debug_$type" => sub {
+                    my ($client, $acc, $data) = @_;
+                    $callback->($self, $client, $acc, $data);
+                }
+            );
+        }
+    }
+
+    return $client;
+}
 
 
 has xmpp_disco => (
@@ -131,6 +175,20 @@ has group_options => (
         add_group_options => 'push',
     },
 );
+
+
+has error_callback => (
+    is          => 'rw',
+    isa         => 'CodeRef',
+    lazy_build  => 1,
+);
+
+sub _build_error_callback {
+    return sub {
+        my ($self, $message) = @_;
+        warn "XMPP Error: ", $message, "\n";
+    }
+}
 
 
 sub jid {
@@ -208,7 +266,7 @@ sub initialize {
         # TODO Need more robust logging
         error         => sub { 
             my ($client, $account, $error) = @_;
-            warn "XMPP Error: ", $error->string, "\n";
+            $self->error_callback->($self, $error->string);
         },
     );
 
@@ -259,6 +317,27 @@ sub join_group {
 }
 
 
+sub _identity_from_jid {
+    my ($self, $jid) = @_;
+
+    my $contact = $self->xmpp_contact($jid);
+
+    if (defined $contact) {
+        return Bot::Backbone::Identity->new(
+            username => $contact->jid,
+            nickname => $contact->name // $contact->jid,
+            me       => $contact->is_me,
+        );
+    }
+    else {
+        return Bot::Backbone::Identity->new(
+            username => $jid,
+            nickname => $jid,
+            me       => 0,
+        );
+    }
+}
+
 sub got_direct_message {
     my ($self, $client, $account, $xmpp_message) = @_;
 
@@ -269,16 +348,8 @@ sub got_direct_message {
 
     my $message = Bot::Backbone::Message->new({
         chat => $self,
-        from => Bot::Backbone::Identity->new(
-            username => $from_contact->jid,
-            nickname => $from_contact->name // $from_contact->jid,
-            me       => $from_contact->is_me,
-        ),
-        to   => Bot::Backbone::Identity->new(
-            username => $to_contact->jid,
-            nickname => $to_contact->name // $to_contact->jid,
-            me       => $to_contact->is_me,
-        ),
+        from => $self->_identity_from_jid($xmpp_message->to),
+        to   => $self->_identity_from_jid($xmpp_message->from),
         group => undef,
         text  => $xmpp_message->body,
     });
@@ -403,7 +474,7 @@ Bot::Backbone::Service::JabberChat - Connect and chat with a Jabber server
 
 =head1 VERSION
 
-version 0.140590
+version 0.141180
 
 =head1 SYNOPSIS
 
@@ -457,6 +528,30 @@ This is the port to connect. If you do not set it to anything, the default of 52
 These are additional connection arguments to pass to the XMPP connector. See
 L<AnyEvent::XMPP::Connection> for a list of available options.
 
+=head2 debug_client
+
+Set to true if you want to enable debugging. This uses the built-in debug option
+of L<AnyEvent::XMPP::Client>. If you want more control over how debugging is
+handled, see L</xmpp_debug_recv_callback> and L</xmpp_debug_send_callback>.
+
+=head2 xmpp_debug_send_callback
+
+=head2 xmpp_debug_recv_callback
+
+These attributes may be set to a code reference that will be called with every
+message received from the XMPP server. This could be useful for troubleshooting
+certain kinds of problems in cases where you'd like more control over the output
+than you get from L</debug>.
+
+Each will be called like this:
+
+  $callback->($service, $xmpp_client, $account, $data);
+
+The C<$service> is this object. The C<$xmpp_client> will be the same object as
+is returned by L</xmpp_client>. The C<$account> is the
+L<AnyEvent::XMPP::Account> the bot has connected as (useful for getting the
+jid). And the C<$data> is the raw XML being sent or received.
+
 =head2 xmpp_client
 
 This is the XMPP client object for organizing connections.
@@ -478,6 +573,17 @@ messages, this will be set to true.
 
 This is a list of multi-user chat groups the bot has joined or intends to join
 once L</session_ready> becomes true.
+
+=head2 error_callback
+
+This callback is executed in case of an error. It will receive two arguments
+like so:
+
+  $callback->($service, $message);
+
+The first argument is the L<Bot::Backbone::Service::JabberChat> object and the
+second is the error message the server sent. The default handler uses warn to
+log the message to the console.
 
 =head1 METHODS
 
