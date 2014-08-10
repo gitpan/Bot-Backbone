@@ -1,11 +1,10 @@
 package Bot::Backbone::Dispatcher;
-{
-  $Bot::Backbone::Dispatcher::VERSION = '0.141180';
-}
+$Bot::Backbone::Dispatcher::VERSION = '0.142220';
 use v5.10;
 use Moose;
 
 use Bot::Backbone::Types qw( PredicateList );
+use Bot::Backbone::Dispatcher::PredicateIterator;
 
 # ABSTRACT: Simple dispatching tool
 
@@ -66,11 +65,21 @@ sub add_predicate_or_return {
     }
 }
 
+
+sub predicate_iterator {
+    my $self = shift;
+    return Bot::Backbone::Dispatcher::PredicateIterator->new(
+        dispatcher => $self,
+    );
+}
+
 __PACKAGE__->meta->make_immutable;
 
 __END__
 
 =pod
+
+=encoding UTF-8
 
 =head1 NAME
 
@@ -78,7 +87,7 @@ Bot::Backbone::Dispatcher - Simple dispatching tool
 
 =head1 VERSION
 
-version 0.141180
+version 0.142220
 
 =head1 SYNOPSIS
 
@@ -119,6 +128,15 @@ Given a L<Bot::Backbone::Message>, this will execute each predicate attached to 
 Chances are that you probably don't need this method. However, if you are creating a new kind of predicate, you will probably want this method.
 
 This will do the right thing to either add a root level predicate to the dispatcher or return the predicate for chaining within another predicate. You probably want to read the code in L<Bot::Backbone::DispatchSugar> for examples.
+
+=head2 predicate_iterator
+
+  my $iterator = $dispatcher->predicate_iterator;
+  while (my $predicate = $iterator->next) {
+      # do something...
+  }
+
+Returns a L<Bot::Backbone::Dispatcher::PredicateIterator> for this dispatcher.
 
 =head1 AUTHOR
 

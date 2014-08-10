@@ -1,24 +1,20 @@
 package Bot::Backbone::Dispatcher::Predicate;
-{
-  $Bot::Backbone::Dispatcher::Predicate::VERSION = '0.141180';
-}
+$Bot::Backbone::Dispatcher::Predicate::VERSION = '0.142220';
 use v5.10;
-use Moose;
+use Moose::Role;
 
 # ABSTRACT: Defines the predicate packages responsible for aiding dispatch
 
 
-__PACKAGE__->meta->make_immutable;
+requires qw( do_it more_predicates );
 
 {
     package Bot::Backbone::Dispatcher::Predicate::RedispatchTo;
-{
-  $Bot::Backbone::Dispatcher::Predicate::RedispatchTo::VERSION = '0.141180';
-}
+$Bot::Backbone::Dispatcher::Predicate::RedispatchTo::VERSION = '0.142220';
     use v5.10;
     use Moose;
 
-    extends 'Bot::Backbone::Dispatcher::Predicate';
+    with 'Bot::Backbone::Dispatcher::Predicate';
 
     has name => ( is => 'ro', isa => 'Str', required => 1 );
 
@@ -29,18 +25,25 @@ __PACKAGE__->meta->make_immutable;
         return $redispatch_service->dispatch_message($message);
     }
 
+    sub more_predicates {
+        my ($self, $service) = @_;
+
+        my $redispatch_service = $service->get_service($self->name);
+        my $dispatcher = $redispatch_service->dispatcher;
+        return (
+            $dispatcher->list_predicates,
+            $dispatcher->list_also_predicates,
+        );
+    }
+
     __PACKAGE__->meta->make_immutable;
 }
 
 {
     package Bot::Backbone::Dispatcher::Predicate::Nesting;
-{
-  $Bot::Backbone::Dispatcher::Predicate::Nesting::VERSION = '0.141180';
-}
+$Bot::Backbone::Dispatcher::Predicate::Nesting::VERSION = '0.142220';
     use v5.10;
     use Moose;
-
-    extends 'Bot::Backbone::Dispatcher::Predicate';
 
     has next_predicate => ( 
         is           => 'ro', 
@@ -49,26 +52,32 @@ __PACKAGE__->meta->make_immutable;
         handles      => [ 'do_it' ],
     );
 
+    with 'Bot::Backbone::Dispatcher::Predicate';
+
+    # This is what handles => [ 'do_it' ] is doing above
     # sub do_it {
     #     my ($self, $service, $message) = @_;
     #     return $self->next_predicate->do_it($service, $message);
     # }
+
+    sub more_predicates {
+        my ($self, $service) = @_;
+        return ($self->next_predicate);
+    }
 
     __PACKAGE__->meta->make_immutable;
 }
 
 {
     package Bot::Backbone::Dispatcher::Predicate::Command;
-{
-  $Bot::Backbone::Dispatcher::Predicate::Command::VERSION = '0.141180';
-}
+$Bot::Backbone::Dispatcher::Predicate::Command::VERSION = '0.142220';
     use v5.10;
     use Moose;
 
     extends 'Bot::Backbone::Dispatcher::Predicate::Nesting';
 
     has match => (
-        is          => 'ro',
+        is          => 'rw',
         isa         => 'Str|RegexpRef',
         required    => 1,
     );
@@ -91,9 +100,7 @@ __PACKAGE__->meta->make_immutable;
 
 {
     package Bot::Backbone::Dispatcher::Predicate::NotCommand;
-{
-  $Bot::Backbone::Dispatcher::Predicate::NotCommand::VERSION = '0.141180';
-}
+$Bot::Backbone::Dispatcher::Predicate::NotCommand::VERSION = '0.142220';
     use v5.10;
     use Moose;
 
@@ -114,9 +121,7 @@ __PACKAGE__->meta->make_immutable;
 
 {
     package Bot::Backbone::Dispatcher::Predicate::ToMe;
-{
-  $Bot::Backbone::Dispatcher::Predicate::ToMe::VERSION = '0.141180';
-}
+$Bot::Backbone::Dispatcher::Predicate::ToMe::VERSION = '0.142220';
     use v5.10;
     use Moose;
 
@@ -152,9 +157,7 @@ __PACKAGE__->meta->make_immutable;
 
 {
     package Bot::Backbone::Dispatcher::Predicate::Volume;
-{
-  $Bot::Backbone::Dispatcher::Predicate::Volume::VERSION = '0.141180';
-}
+$Bot::Backbone::Dispatcher::Predicate::Volume::VERSION = '0.142220';
     use v5.10;
     use Moose;
 
@@ -184,9 +187,7 @@ __PACKAGE__->meta->make_immutable;
 
 {
     package Bot::Backbone::Dispatcher::Predicate::GivenParameters;
-{
-  $Bot::Backbone::Dispatcher::Predicate::GivenParameters::VERSION = '0.141180';
-}
+$Bot::Backbone::Dispatcher::Predicate::GivenParameters::VERSION = '0.142220';
     use v5.10;
     use Moose;
 
@@ -260,13 +261,9 @@ __PACKAGE__->meta->make_immutable;
 
 {
     package Bot::Backbone::Dispatcher::Predicate::Functor;
-{
-  $Bot::Backbone::Dispatcher::Predicate::Functor::VERSION = '0.141180';
-}
+$Bot::Backbone::Dispatcher::Predicate::Functor::VERSION = '0.142220';
     use v5.10;
-    use Moose;
-
-    extends 'Bot::Backbone::Dispatcher::Predicate';
+    use Moose::Role;
 
     use Bot::Backbone::Types qw( DispatcherType );
 
@@ -295,13 +292,14 @@ __PACKAGE__->meta->make_immutable;
 
 {
     package Bot::Backbone::Dispatcher::Predicate::Respond;
-{
-  $Bot::Backbone::Dispatcher::Predicate::Respond::VERSION = '0.141180';
-}
+$Bot::Backbone::Dispatcher::Predicate::Respond::VERSION = '0.142220';
     use v5.10;
     use Moose;
 
-    extends 'Bot::Backbone::Dispatcher::Predicate::Functor';
+    with qw(
+        Bot::Backbone::Dispatcher::Predicate
+        Bot::Backbone::Dispatcher::Predicate::Functor
+    );
 
     sub do_it {
         my ($self, $service, $message) = @_;
@@ -319,24 +317,29 @@ __PACKAGE__->meta->make_immutable;
         return '';
     }
 
+    sub more_predicates { () }
+
     __PACKAGE__->meta->make_immutable;
 }
 
 {
     package Bot::Backbone::Dispatcher::Predicate::Run;
-{
-  $Bot::Backbone::Dispatcher::Predicate::Run::VERSION = '0.141180';
-}
+$Bot::Backbone::Dispatcher::Predicate::Run::VERSION = '0.142220';
     use v5.10;
     use Moose;
 
-    extends 'Bot::Backbone::Dispatcher::Predicate::Functor';
+    with qw(
+        Bot::Backbone::Dispatcher::Predicate
+        Bot::Backbone::Dispatcher::Predicate::Functor
+    );
 
     sub do_it {
         my ($self, $service, $message) = @_;
         my $invocant = $self->select_invocant($service);
         return $self->call_the_code($invocant, $message);
     }
+
+    sub more_predicates { () }
 
     __PACKAGE__->meta->make_immutable;
 }
@@ -347,13 +350,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Bot::Backbone::Dispatcher::Predicate - Defines the predicate packages responsible for aiding dispatch
 
 =head1 VERSION
 
-version 0.141180
+version 0.142220
 
 =head1 DESCRIPTION
 

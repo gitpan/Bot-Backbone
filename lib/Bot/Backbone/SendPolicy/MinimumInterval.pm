@@ -1,7 +1,5 @@
 package Bot::Backbone::SendPolicy::MinimumInterval;
-{
-  $Bot::Backbone::SendPolicy::MinimumInterval::VERSION = '0.141180';
-}
+$Bot::Backbone::SendPolicy::MinimumInterval::VERSION = '0.142220';
 use v5.10;
 use Moose;
 
@@ -92,13 +90,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Bot::Backbone::SendPolicy::MinimumInterval - Prevent any message from being delivered too soon
 
 =head1 VERSION
 
-version 0.141180
+version 0.142220
 
 =head1 SYNOPSIS
 

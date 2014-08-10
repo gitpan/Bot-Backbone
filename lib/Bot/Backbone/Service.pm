@@ -1,7 +1,5 @@
 package Bot::Backbone::Service;
-{
-  $Bot::Backbone::Service::VERSION = '0.141180';
-}
+$Bot::Backbone::Service::VERSION = '0.142220';
 use v5.10;
 use Moose();
 use Bot::Backbone::DispatchSugar();
@@ -42,26 +40,15 @@ sub service_dispatcher($) {
 
     ensure_all_roles($meta->name, 'Bot::Backbone::Service::Role::Dispatch');
 
-    my $dispatcher_name_attr = $meta->find_attribute_by_name('dispatcher_name');
-    my $new_dispatcher_name_attr = $dispatcher_name_attr->clone_and_inherit_options(
-        default => '<From Bot::Backbone::Service>',
-    );
-    $meta->add_attribute($new_dispatcher_name_attr);
-
-    my $dispatcher_attr = $meta->find_attribute_by_name('dispatcher');
-    my $new_dispatcher_attr = $dispatcher_attr->clone_and_inherit_options(
-        default => sub {
-            my $dispatcher = Bot::Backbone::Dispatcher->new;
-            {
-                $meta->building_dispatcher($dispatcher);
-                $code->();
-                $meta->no_longer_building_dispatcher,
-            }
-            return $dispatcher;
-        },
-    );
-    $meta->add_attribute($new_dispatcher_attr);
-
+    $meta->dispatch_builder(sub {
+        my $dispatcher = Bot::Backbone::Dispatcher->new;
+        {
+            $meta->building_dispatcher($dispatcher);
+            $code->();
+            $meta->no_longer_building_dispatcher,
+        }
+        return $dispatcher;
+    });
 }
 
 
@@ -71,13 +58,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Bot::Backbone::Service - Useful features for services
 
 =head1 VERSION
 
-version 0.141180
+version 0.142220
 
 =head1 SYNOPSIS
 
@@ -200,11 +189,19 @@ C<respond_with_method>. As stated for C<respond>, the first argument is the serv
 
 =item *
 
+C<respond_with_bot_method>. This is similar to C<respond_with_method>, but instead of calling a method within the service, it will call a method directly on the bot to which the service has been added.
+
+=item *
+
 C<run_this>. This run mode operation will be passed the service object as the first argument, rather than that bot object.
 
 =item *
 
 C<run_this_method>. As stated for C<respond>, the first argument is the service object. The method is also a method defined within the current service package rather than the bot.
+
+=item *
+
+C<run_this_bot_method>. This is similar to C<run_this_method>, but results in a call to a method on the bot object rather than on the service.
 
 =back
 

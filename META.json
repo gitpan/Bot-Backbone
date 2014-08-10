@@ -4,7 +4,7 @@
       "Andrew Sterling Hanenkamp <hanenkamp@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300038, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Dist::Zilla version 5.019, CPAN::Meta::Converter version 2.141520",
    "license" : [
       "perl_5"
    ],
@@ -34,6 +34,7 @@
             "AnyEvent::XMPP::Ext::MUC" : "0",
             "Carp" : "0",
             "Class::Load" : "0",
+            "DBIx::Connector" : "0",
             "List::MoreUtils" : "0",
             "List::Util" : "0",
             "Moose" : "0",
@@ -72,6 +73,6 @@
          "web" : "http://github.com/zostay/Bot-Backbone"
       }
    },
-   "version" : "0.141180"
+   "version" : "0.142220"
 }
 

@@ -1,7 +1,5 @@
 package Bot::Backbone::SendPolicy::Aggregate;
-{
-  $Bot::Backbone::SendPolicy::Aggregate::VERSION = '0.141180';
-}
+$Bot::Backbone::SendPolicy::Aggregate::VERSION = '0.142220';
 use v5.10;
 use Moose;
 
@@ -72,13 +70,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Bot::Backbone::SendPolicy::Aggregate - Pull several send policies together
 
 =head1 VERSION
 
-version 0.141180
+version 0.142220
 
 =head1 DESCRIPTION
 

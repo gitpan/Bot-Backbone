@@ -1,11 +1,19 @@
 package Bot::Backbone::Meta::Class::DispatchBuilder;
-{
-  $Bot::Backbone::Meta::Class::DispatchBuilder::VERSION = '0.141180';
-}
+$Bot::Backbone::Meta::Class::DispatchBuilder::VERSION = '0.142220';
 use Moose::Role;
 
 # ABSTRACT: Metaclass role providing dispatcher setup helps
 
+
+has dispatch_builder => (
+    is          => 'rw',
+    isa         => 'CodeRef',
+    predicate   => 'has_dispatch_builder',
+    traits      => [ 'Code' ],
+    handles     => {
+        run_dispatch_builder => 'execute',
+    },
+);
 
 has building_dispatcher => (
     is          => 'rw',
@@ -19,13 +27,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Bot::Backbone::Meta::Class::DispatchBuilder - Metaclass role providing dispatcher setup helps
 
 =head1 VERSION
 
-version 0.141180
+version 0.142220
 
 =head1 DESCRIPTION
 

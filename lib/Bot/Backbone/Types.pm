@@ -1,7 +1,5 @@
 package Bot::Backbone::Types;
-{
-  $Bot::Backbone::Types::VERSION = '0.141180';
-}
+$Bot::Backbone::Types::VERSION = '0.142220';
 use v5.10;
 use Moose;
 
@@ -37,9 +35,10 @@ subtype EventLoop,
     where { $_->can('run') };
 
 
-class_type 'Bot::Backbone::Dispatcher::Predicate';
+role_type 'Bot::Backbone::Dispatcher::Predicate';
 subtype PredicateList,
-    as ArrayRef['Bot::Backbone::Dispatcher::Predicate'];
+    as ArrayRef,
+    where { all { $_->does('Bot::Backbone::Dispatcher::Predicate') } @$_ };
 
 
 class_type 'Bot::Backbone::Service::Role::Service';
@@ -56,13 +55,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Bot::Backbone::Types - The type library for Bot::Backbone
 
 =head1 VERSION
 
-version 0.141180
+version 0.142220
 
 =head1 DESCRIPTION
 

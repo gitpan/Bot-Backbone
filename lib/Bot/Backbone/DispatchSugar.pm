@@ -1,7 +1,5 @@
 package Bot::Backbone::DispatchSugar;
-{
-  $Bot::Backbone::DispatchSugar::VERSION = '0.141180';
-}
+$Bot::Backbone::DispatchSugar::VERSION = '0.142220';
 use v5.10;
 use Moose();
 use Moose::Exporter;
@@ -155,37 +153,39 @@ sub as(&) {
 }
 
 sub _respond { 
-    my ($meta, $code) = @_;
+    my ($meta, $code, $dispatcher_type) = @_;
     my $dispatcher = $meta->building_dispatcher;
 
+    $dispatcher_type //= $meta;
     $dispatcher->add_predicate_or_return(
         Bot::Backbone::Dispatcher::Predicate::Respond->new(
-            dispatcher_type => $meta,
+            dispatcher_type => $dispatcher_type,
             the_code        => $code,
         )
     );
 }
 
 sub respond(&) {
-    my ($meta, $code) = @_;
-    _respond($meta, $code);
+    my ($meta, $code, $dispatcher_type) = @_;
+    _respond($meta, $code, $dispatcher_type);
 }
 
 sub _run_this {
-    my ($meta, $code) = @_;
+    my ($meta, $code, $dispatcher_type) = @_;
     my $dispatcher = $meta->building_dispatcher;
 
+    $dispatcher_type //= $meta;
     $dispatcher->add_predicate_or_return(
         Bot::Backbone::Dispatcher::Predicate::Run->new(
-            dispatcher_type => $meta,
+            dispatcher_type => $dispatcher_type,
             the_code        => $code,
         )
     );
 }
 
 sub run_this(&) {
-    my ($meta, $code) = @_;
-    _run_this($meta, $code);
+    my ($meta, $code, $dispatcher_type) = @_;
+    _run_this($meta, $code, $dispatcher_type);
 }
 
 sub _by_method {
@@ -221,6 +221,34 @@ sub run_this_method($) {
     _run_this($meta, \&$code);
 }
 
+sub respond_by_service_method($) {
+    my ($meta, $name) = @_;
+
+    my $code = _by_method($meta, $name);
+    _respond($meta, \&$code, 'service');
+}
+
+sub respond_by_bot_method($) {
+    my ($meta, $name) = @_;
+
+    my $code = _by_method($meta, $name);
+    _respond($meta, \&$code, 'bot');
+}
+
+sub run_this_service_method($) {
+    my ($meta, $name) = @_;
+
+    my $code = _by_method($meta, $name);
+    _run_this($meta, \&$code, 'service');
+}
+
+sub run_this_bot_method($) {
+    my ($meta, $name) = @_;
+
+    my $code = _by_method($meta, $name);
+    _run_this($meta, \&$code, 'bot');
+}
+
 # These are documented in Bot::Backbone and Bot::Backbone::Service
 
 
@@ -231,13 +259,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Bot::Backbone::DispatchSugar - Shared sugar methods for dispatch
 
 =head1 VERSION
 
-version 0.141180
+version 0.142220
 
 =head1 DESCRIPTION
 
@@ -255,8 +285,12 @@ See L<Bot::Backbone> and L<Bot::Backbone::Service>.
   redispatch_to
   respond
   respond_by_method
+  respond_by_service_method
+  respond_by_bot_method
   run_this
   run_this_method
+  run_this_service_method
+  run_this_bot_method
   shouted
   spoken
   to_me

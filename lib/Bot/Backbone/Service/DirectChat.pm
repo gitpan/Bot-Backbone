@@ -1,9 +1,7 @@
 package Bot::Backbone::Service::DirectChat;
-{
-  $Bot::Backbone::Service::DirectChat::VERSION = '0.141180';
-}
+$Bot::Backbone::Service::DirectChat::VERSION = '0.142220';
 use v5.10;
-use Moose;
+use Bot::Backbone::Service;
 
 with qw(
     Bot::Backbone::Service::Role::Service
@@ -54,13 +52,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Bot::Backbone::Service::DirectChat - A helper for doing direct chats
 
 =head1 VERSION
 
-version 0.141180
+version 0.142220
 
 =head1 SYNOPSIS
 

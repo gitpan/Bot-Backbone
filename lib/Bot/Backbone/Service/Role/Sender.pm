@@ -1,7 +1,5 @@
 package Bot::Backbone::Service::Role::Sender;
-{
-  $Bot::Backbone::Service::Role::Sender::VERSION = '0.141180';
-}
+$Bot::Backbone::Service::Role::Sender::VERSION = '0.142220';
 use Moose::Role;
 
 # ABSTRACT: Marks a service as one that may send messages
@@ -15,13 +13,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Bot::Backbone::Service::Role::Sender - Marks a service as one that may send messages
 
 =head1 VERSION
 
-version 0.141180
+version 0.142220
 
 =head1 DESCRIPTION
 

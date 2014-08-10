@@ -1,7 +1,5 @@
 package Bot::Backbone::Bot;
-{
-  $Bot::Backbone::Bot::VERSION = '0.141180';
-}
+$Bot::Backbone::Bot::VERSION = '0.142220';
 use v5.10;
 use Moose;
 
@@ -83,13 +81,15 @@ __END__
 
 =pod
 
+=encoding UTF-8
+
 =head1 NAME
 
 Bot::Backbone::Bot - Provides backbone services to your bot
 
 =head1 VERSION
 
-version 0.141180
+version 0.142220
 
 =head1 SYNOPSIS
 
