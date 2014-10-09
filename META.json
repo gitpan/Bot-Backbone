@@ -4,7 +4,7 @@
       "Andrew Sterling Hanenkamp <hanenkamp@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 5.019, CPAN::Meta::Converter version 2.141520",
+   "generated_by" : "Dist::Zilla version 5.020, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -16,7 +16,7 @@
    "prereqs" : {
       "configure" : {
          "requires" : {
-            "ExtUtils::MakeMaker" : "6.30"
+            "ExtUtils::MakeMaker" : "0"
          }
       },
       "develop" : {
@@ -45,6 +45,7 @@
             "MooseX::Types" : "0",
             "MooseX::Types::Moose" : "0",
             "POE" : "0",
+            "POE::Component::IRC::State" : "0",
             "POE::Loop::AnyEvent" : "0",
             "POE::Wheel::ReadLine" : "0",
             "Scalar::Util" : "0",
@@ -71,8 +72,9 @@
          "type" : "git",
          "url" : "git://github.com/zostay/Bot-Backbone.git",
          "web" : "http://github.com/zostay/Bot-Backbone"
-      }
+      },
+      "x_IRC" : "irc://irc.perl.org/#backbone"
    },
-   "version" : "0.142220"
+   "version" : "0.142820"
 }
 

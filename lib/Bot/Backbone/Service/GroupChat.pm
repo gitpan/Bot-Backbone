@@ -1,5 +1,5 @@
 package Bot::Backbone::Service::GroupChat;
-$Bot::Backbone::Service::GroupChat::VERSION = '0.142220';
+$Bot::Backbone::Service::GroupChat::VERSION = '0.142820';
 use v5.10;
 use Bot::Backbone::Service;
 
@@ -81,7 +81,7 @@ Bot::Backbone::Service::GroupChat - A helper chat for performing group chats
 
 =head1 VERSION
 
-version 0.142220
+version 0.142820
 
 =head1 SYNOPSIS
 

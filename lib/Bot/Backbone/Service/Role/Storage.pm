@@ -1,5 +1,5 @@
 package Bot::Backbone::Service::Role::Storage;
-$Bot::Backbone::Service::Role::Storage::VERSION = '0.142220';
+$Bot::Backbone::Service::Role::Storage::VERSION = '0.142820';
 use Moose::Role;
 
 use DBIx::Connector;
@@ -65,7 +65,7 @@ Bot::Backbone::Service::Role::Storage - Helper for adding storage to standard mo
 
 =head1 VERSION
 
-version 0.142220
+version 0.142820
 
 =head1 SYNOPSIS
 

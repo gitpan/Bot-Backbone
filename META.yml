@@ -3,43 +3,45 @@ abstract: 'Extensible framework for building bots'
 author:
   - 'Andrew Sterling Hanenkamp <hanenkamp@cpan.org>'
 build_requires:
-  Test::More: '0'
-  lib: '0'
-  strict: '0'
-  warnings: '0'
+  Test::More: 0
+  lib: 0
+  strict: 0
+  warnings: 0
 configure_requires:
-  ExtUtils::MakeMaker: '6.30'
+  ExtUtils::MakeMaker: 0
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 5.019, CPAN::Meta::Converter version 2.141520'
+generated_by: 'Dist::Zilla version 5.020, CPAN::Meta::Converter version 2.120921'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
-  version: '1.4'
+  version: 1.4
 name: Bot-Backbone
 requires:
-  AnyEvent: '0'
-  AnyEvent::XMPP::Client: '0'
-  AnyEvent::XMPP::Ext::Disco: '0'
-  AnyEvent::XMPP::Ext::MUC: '0'
-  Carp: '0'
-  Class::Load: '0'
-  DBIx::Connector: '0'
-  List::MoreUtils: '0'
-  List::Util: '0'
-  Moose: '0'
-  Moose::Exporter: '0'
-  Moose::Meta::Class: '0'
-  Moose::Role: '0'
-  Moose::Util: '0'
-  MooseX::Types: '0'
-  MooseX::Types::Moose: '0'
-  POE: '0'
-  POE::Loop::AnyEvent: '0'
-  POE::Wheel::ReadLine: '0'
-  Scalar::Util: '0'
-  namespace::autoclean: '0'
+  AnyEvent: 0
+  AnyEvent::XMPP::Client: 0
+  AnyEvent::XMPP::Ext::Disco: 0
+  AnyEvent::XMPP::Ext::MUC: 0
+  Carp: 0
+  Class::Load: 0
+  DBIx::Connector: 0
+  List::MoreUtils: 0
+  List::Util: 0
+  Moose: 0
+  Moose::Exporter: 0
+  Moose::Meta::Class: 0
+  Moose::Role: 0
+  Moose::Util: 0
+  MooseX::Types: 0
+  MooseX::Types::Moose: 0
+  POE: 0
+  POE::Component::IRC::State: 0
+  POE::Loop::AnyEvent: 0
+  POE::Wheel::ReadLine: 0
+  Scalar::Util: 0
+  namespace::autoclean: 0
   perl: v5.10.0
 resources:
   bugtracker: http://rt.cpan.org/NoAuth/Bugs.html?Dist=Bot-Backbone
   repository: git://github.com/zostay/Bot-Backbone.git
-version: '0.142220'
+  x_IRC: irc://irc.perl.org/#backbone
+version: 0.142820

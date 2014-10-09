@@ -1,5 +1,5 @@
 package Bot::Backbone::Dispatcher::PredicateIterator;
-$Bot::Backbone::Dispatcher::PredicateIterator::VERSION = '0.142220';
+$Bot::Backbone::Dispatcher::PredicateIterator::VERSION = '0.142820';
 use v5.10;
 use Moose;
 
@@ -69,7 +69,7 @@ Bot::Backbone::Dispatcher::PredicateIterator - Iterator over the predicates in a
 
 =head1 VERSION
 
-version 0.142220
+version 0.142820
 
 =head1 SYNOPSIS
 

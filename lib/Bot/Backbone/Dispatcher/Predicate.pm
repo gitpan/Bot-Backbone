@@ -1,5 +1,5 @@
 package Bot::Backbone::Dispatcher::Predicate;
-$Bot::Backbone::Dispatcher::Predicate::VERSION = '0.142220';
+$Bot::Backbone::Dispatcher::Predicate::VERSION = '0.142820';
 use v5.10;
 use Moose::Role;
 
@@ -10,8 +10,8 @@ requires qw( do_it more_predicates );
 
 {
     package Bot::Backbone::Dispatcher::Predicate::RedispatchTo;
-$Bot::Backbone::Dispatcher::Predicate::RedispatchTo::VERSION = '0.142220';
-    use v5.10;
+$Bot::Backbone::Dispatcher::Predicate::RedispatchTo::VERSION = '0.142820';
+use v5.10;
     use Moose;
 
     with 'Bot::Backbone::Dispatcher::Predicate';
@@ -41,8 +41,8 @@ $Bot::Backbone::Dispatcher::Predicate::RedispatchTo::VERSION = '0.142220';
 
 {
     package Bot::Backbone::Dispatcher::Predicate::Nesting;
-$Bot::Backbone::Dispatcher::Predicate::Nesting::VERSION = '0.142220';
-    use v5.10;
+$Bot::Backbone::Dispatcher::Predicate::Nesting::VERSION = '0.142820';
+use v5.10;
     use Moose;
 
     has next_predicate => ( 
@@ -70,8 +70,8 @@ $Bot::Backbone::Dispatcher::Predicate::Nesting::VERSION = '0.142220';
 
 {
     package Bot::Backbone::Dispatcher::Predicate::Command;
-$Bot::Backbone::Dispatcher::Predicate::Command::VERSION = '0.142220';
-    use v5.10;
+$Bot::Backbone::Dispatcher::Predicate::Command::VERSION = '0.142820';
+use v5.10;
     use Moose;
 
     extends 'Bot::Backbone::Dispatcher::Predicate::Nesting';
@@ -100,8 +100,8 @@ $Bot::Backbone::Dispatcher::Predicate::Command::VERSION = '0.142220';
 
 {
     package Bot::Backbone::Dispatcher::Predicate::NotCommand;
-$Bot::Backbone::Dispatcher::Predicate::NotCommand::VERSION = '0.142220';
-    use v5.10;
+$Bot::Backbone::Dispatcher::Predicate::NotCommand::VERSION = '0.142820';
+use v5.10;
     use Moose;
 
     extends 'Bot::Backbone::Dispatcher::Predicate::Nesting';
@@ -121,8 +121,8 @@ $Bot::Backbone::Dispatcher::Predicate::NotCommand::VERSION = '0.142220';
 
 {
     package Bot::Backbone::Dispatcher::Predicate::ToMe;
-$Bot::Backbone::Dispatcher::Predicate::ToMe::VERSION = '0.142220';
-    use v5.10;
+$Bot::Backbone::Dispatcher::Predicate::ToMe::VERSION = '0.142820';
+use v5.10;
     use Moose;
 
     extends 'Bot::Backbone::Dispatcher::Predicate::Nesting';
@@ -157,8 +157,8 @@ $Bot::Backbone::Dispatcher::Predicate::ToMe::VERSION = '0.142220';
 
 {
     package Bot::Backbone::Dispatcher::Predicate::Volume;
-$Bot::Backbone::Dispatcher::Predicate::Volume::VERSION = '0.142220';
-    use v5.10;
+$Bot::Backbone::Dispatcher::Predicate::Volume::VERSION = '0.142820';
+use v5.10;
     use Moose;
 
     extends 'Bot::Backbone::Dispatcher::Predicate::Nesting';
@@ -187,8 +187,8 @@ $Bot::Backbone::Dispatcher::Predicate::Volume::VERSION = '0.142220';
 
 {
     package Bot::Backbone::Dispatcher::Predicate::GivenParameters;
-$Bot::Backbone::Dispatcher::Predicate::GivenParameters::VERSION = '0.142220';
-    use v5.10;
+$Bot::Backbone::Dispatcher::Predicate::GivenParameters::VERSION = '0.142820';
+use v5.10;
     use Moose;
 
     extends 'Bot::Backbone::Dispatcher::Predicate::Nesting';
@@ -261,8 +261,8 @@ $Bot::Backbone::Dispatcher::Predicate::GivenParameters::VERSION = '0.142220';
 
 {
     package Bot::Backbone::Dispatcher::Predicate::Functor;
-$Bot::Backbone::Dispatcher::Predicate::Functor::VERSION = '0.142220';
-    use v5.10;
+$Bot::Backbone::Dispatcher::Predicate::Functor::VERSION = '0.142820';
+use v5.10;
     use Moose::Role;
 
     use Bot::Backbone::Types qw( DispatcherType );
@@ -292,8 +292,8 @@ $Bot::Backbone::Dispatcher::Predicate::Functor::VERSION = '0.142220';
 
 {
     package Bot::Backbone::Dispatcher::Predicate::Respond;
-$Bot::Backbone::Dispatcher::Predicate::Respond::VERSION = '0.142220';
-    use v5.10;
+$Bot::Backbone::Dispatcher::Predicate::Respond::VERSION = '0.142820';
+use v5.10;
     use Moose;
 
     with qw(
@@ -324,7 +324,8 @@ $Bot::Backbone::Dispatcher::Predicate::Respond::VERSION = '0.142220';
 
 {
     package Bot::Backbone::Dispatcher::Predicate::Run;
-$Bot::Backbone::Dispatcher::Predicate::Run::VERSION = '0.142220';
+$Bot::Backbone::Dispatcher::Predicate::Run::VERSION = '0.142820';
+
     use v5.10;
     use Moose;
 
@@ -358,7 +359,7 @@ Bot::Backbone::Dispatcher::Predicate - Defines the predicate packages responsibl
 
 =head1 VERSION
 
-version 0.142220
+version 0.142820
 
 =head1 DESCRIPTION
 

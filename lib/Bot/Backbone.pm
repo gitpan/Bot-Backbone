@@ -1,5 +1,5 @@
 package Bot::Backbone;
-$Bot::Backbone::VERSION = '0.142220';
+$Bot::Backbone::VERSION = '0.142820';
 use v5.10;
 use Moose();
 use Bot::Backbone::DispatchSugar();
@@ -101,7 +101,7 @@ Bot::Backbone - Extensible framework for building bots
 
 =head1 VERSION
 
-version 0.142220
+version 0.142820
 
 =head1 SYNOPSIS
 

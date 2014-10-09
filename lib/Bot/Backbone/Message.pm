@@ -1,5 +1,5 @@
 package Bot::Backbone::Message;
-$Bot::Backbone::Message::VERSION = '0.142220';
+$Bot::Backbone::Message::VERSION = '0.142820';
 use v5.10;
 use Moose;
 
@@ -62,8 +62,8 @@ has text => (
 
 {
     package Bot::Backbone::Message::Arg;
-$Bot::Backbone::Message::Arg::VERSION = '0.142220';
-    use Moose;
+$Bot::Backbone::Message::Arg::VERSION = '0.142820';
+use Moose;
 
     has [ qw( text original ) ] => (
         is       => 'rw', 
@@ -349,7 +349,7 @@ Bot::Backbone::Message - Describes a message or response
 
 =head1 VERSION
 
-version 0.142220
+version 0.142820
 
 =head1 SYNOPSIS
 

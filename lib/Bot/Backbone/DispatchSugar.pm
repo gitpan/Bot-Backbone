@@ -1,5 +1,5 @@
 package Bot::Backbone::DispatchSugar;
-$Bot::Backbone::DispatchSugar::VERSION = '0.142220';
+$Bot::Backbone::DispatchSugar::VERSION = '0.142820';
 use v5.10;
 use Moose();
 use Moose::Exporter;
@@ -267,7 +267,7 @@ Bot::Backbone::DispatchSugar - Shared sugar methods for dispatch
 
 =head1 VERSION
 
-version 0.142220
+version 0.142820
 
 =head1 DESCRIPTION
 

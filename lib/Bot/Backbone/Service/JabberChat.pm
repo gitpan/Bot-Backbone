@@ -1,5 +1,5 @@
 package Bot::Backbone::Service::JabberChat;
-$Bot::Backbone::Service::JabberChat::VERSION = '0.142220';
+$Bot::Backbone::Service::JabberChat::VERSION = '0.142820';
 use v5.10;
 use Bot::Backbone::Service;
 
@@ -364,7 +364,7 @@ sub is_to_me {
 
     my $me_nick = $me_user->nick;
     return scalar($$text =~ s/^ $me_nick \s* [:,\-]
-                             |  , \s* $me_nick [.]? $
+                             |  , \s* $me_nick [.!?]? $
                              |  , \s* $me_nick \s* , 
                              //x);
 }
@@ -474,7 +474,7 @@ Bot::Backbone::Service::JabberChat - Connect and chat with a Jabber server
 
 =head1 VERSION
 
-version 0.142220
+version 0.142820
 
 =head1 SYNOPSIS
 
